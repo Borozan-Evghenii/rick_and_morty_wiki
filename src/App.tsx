@@ -1,9 +1,15 @@
 import './index.css'
+import React from 'react';
+import { Outlet } from 'react-router-dom';
+import { AppRouter, Header } from './utils/components';
+
 const App:React.FC = () => {
   return (
-    <h1 className='text-3xl text-red-50'>
-        Working
-    </h1>
+    <>
+      <Header/>
+      <AppRouter/>
+      <Outlet />
+    </>
   );
 };
 
