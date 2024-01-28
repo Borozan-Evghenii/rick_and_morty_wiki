@@ -1,24 +1,19 @@
 import React from 'react';
-import { Button } from '../../../../utils/UI';
-import { FiArrowUpRight } from 'react-icons/fi';
 import { EpisodeCard } from '../../../../utils/components/episodeCard/EpisodeCard.tsx';
+import { GridLayout, SectionLayout } from '../../../../utils/components/layouts';
 
 const EpisodesSection : React.FC = () => {
   return (
-    <div className={'app-container'}>
-      <div className={'flex items-center justify-between'}>
-        <h2 className={'title3'}>Episodes</h2>
-        <Button icon={<FiArrowUpRight />}>View all</Button>
-      </div>
-      <div className={'grid grid-cols-3 gap-5'}>
+    <SectionLayout title={'Episodes'}>
+      <GridLayout columns={'3'}>
         <EpisodeCard />
         <EpisodeCard />
         <EpisodeCard />
         <EpisodeCard />
         <EpisodeCard />
         <EpisodeCard />
-      </div>
-    </div>
+      </GridLayout>
+    </SectionLayout>
   );
 };
 

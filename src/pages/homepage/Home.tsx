@@ -1,15 +1,16 @@
 import React from 'react';
 import { CharactersSection, HomeHeroSection, LocationSection } from './sections';
 import EpisodesSection from './sections/episodes/EpisodesSection.tsx';
+import { PageLayout } from '../../utils/components/layouts';
 
 
 export const Home: React.FC = () => {
   return (
-    <main className={'p-[10px]'}>
+    <PageLayout>
       <HomeHeroSection />
       <CharactersSection/>
       <EpisodesSection/>
       <LocationSection/>
-    </main>
+    </PageLayout>
   );
 };
