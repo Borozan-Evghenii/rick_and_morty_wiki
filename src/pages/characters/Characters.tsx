@@ -1,8 +1,9 @@
 import React from 'react';
+import { PageLayout } from '../../utils/components/layouts';
 
 export const Characters: React.FC = () => {
   return (
-    <main className=''>
+    <PageLayout>
       <div className="appContainer">
         <div className="grid grid-cols-3">
           <div>Filter</div>
@@ -10,6 +11,6 @@ export const Characters: React.FC = () => {
           <div>Character Info</div>
         </div>
       </div>
-    </main>
+    </PageLayout>
   );
 };

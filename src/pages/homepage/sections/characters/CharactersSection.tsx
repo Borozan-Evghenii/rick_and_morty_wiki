@@ -1,17 +1,12 @@
 import React from 'react';
-import { Button } from '../../../../utils/UI';
-import { FiArrowUpRight } from 'react-icons/fi';
+import { GridLayout, SectionLayout } from '../../../../utils/components/layouts';
 import { CharacterCard } from '../../../../utils/components';
 
 
 export const CharactersSection :React.FC= () => {
   return (
-    <div className={'app-container'}>
-      <div className={'flex items-center justify-between'}>
-        <h2 className={'title3'}>Characters</h2>
-        <Button icon={<FiArrowUpRight />}>View all</Button>
-      </div>
-      <div className={'grid grid-cols-4 gap-5'}>
+    <SectionLayout title={'Characters'}>
+      <GridLayout columns={'4'}>
         <CharacterCard />
         <CharacterCard />
         <CharacterCard />
@@ -20,7 +15,7 @@ export const CharactersSection :React.FC= () => {
         <CharacterCard />
         <CharacterCard />
         <CharacterCard />
-      </div>
-    </div>
+      </GridLayout>
+    </SectionLayout>
   );
 };
