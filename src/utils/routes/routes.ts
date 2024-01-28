@@ -1,4 +1,4 @@
-import { Episodes, Characters, Locations } from '../../pages';
+import { Episodes, Characters, Locations, Home } from '../../pages';
 
 
 interface routes{
@@ -8,7 +8,8 @@ interface routes{
 }
 
 export const routes: routes[] = [
-  {path: '/', element: Characters, name: 'Characters'},
+  {path: '/', element: Home, name: 'Home'},
+  {path: '/characters', element: Characters, name: 'Characters'},
   {path: '/episodes', element: Episodes, name: 'Episodes'},
   {path: '/locations', element: Locations, name: 'Locations'}
 ]
