@@ -13,12 +13,7 @@ export default {
         title3: '3rem',
         title4: '1.25rem',
         title5: '1rem',
-        description: '0.875rem',
-        buttonTextVariant1: '1rem',
-        buttonTextVariant2: '0.875rem',
         regular: '0.875rem',
-        Regular16: '1rem',
-
       },
       fontFamily:{
         sans: ['Syne', 'sans-serif']

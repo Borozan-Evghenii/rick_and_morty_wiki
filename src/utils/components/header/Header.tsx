@@ -3,7 +3,7 @@ import { Link, useLocation } from 'react-router-dom';
 import { routes } from '../../routes/routes.ts';
 import { useTheme } from '../../hooks/useTheme/useTheme.ts';
 import { CiDark, CiLight } from 'react-icons/ci';
-import { Logo } from '../common/icon';
+import { Logo } from '../../UI/icon';
 
 
 export const Header: React.FC = () => {
@@ -18,7 +18,7 @@ export const Header: React.FC = () => {
           <Link to={'/'}>
             <Logo className={'fill-light-primary dark:fill-dark-primary'} width={'40'} height={'40'} />
           </Link>
-          <nav className="flex gap-[50px] items-center">
+          <nav className="hidden items-center sm:flex sm:gap-10">
             {
               routes.map(route => {
                 if (route.path !== '/') {
@@ -35,8 +35,8 @@ export const Header: React.FC = () => {
             onClick={toggleTheme}
           >
             {isDark ?
-              <CiLight className="fill-light-primary " />
-              : <CiDark className="dark:fill-dark-primary " />}
+              <CiLight className="fill-light-primary dark:fill-dark-primary" />
+              : <CiDark className="fill-light-primary dark:fill-dark-primary " />}
           </button>
         </div>
       </div>

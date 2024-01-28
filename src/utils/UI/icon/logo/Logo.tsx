@@ -1,5 +1,5 @@
 import React from 'react';
-import { getProps } from '../../../../../../@types';
+import { getProps } from '../../../../../@types';
 
 
 

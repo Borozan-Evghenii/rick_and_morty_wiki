@@ -6,23 +6,21 @@
 
 
 @layer base {
-    html {
-        @apply font-sans text-light-primary dark:text-dark-primary font-normal
-    }
+
     body {
-        @apply text-regular bg-light-background dark:text-dark-primary
+        @apply text-regular dark:text-dark-primary bg-light-background dark:bg-dark-background
     }
 }
 
 @layer components {
     .link{
-        @apply text-light-primary dark:text-dark-primary after:content-[''] after:top-0 after:w-0 after:block after:h-[1px] after:bg-light-primary after:bg-dark-primary hover:after:w-full after:transition-all
+        @apply text-light-primary dark:text-dark-primary after:content-[''] after:top-0 after:w-0 after:block after:h-[1px] after:bg-light-primary dark:after:bg-dark-primary hover:after:w-full after:transition-all
     }
     .linkActive{
         @apply  after:w-full
     }
-    .appContainer {
-        @apply container mx-auto
+    .app-container {
+        @apply p-5 pt-[40px] flex flex-col gap-10
     }
     .title{
         @apply text-title font-extrabold leading-tight
@@ -34,22 +32,11 @@
         @apply text-title3 font-medium
     }
     .title4{
-        @apply text-title4 font-normal
+        @apply text-title4 font-bold
     }
     .title5{
-        @apply text-title5 font-normal
+        @apply text-title5 font-semibold
     }
-    .description{
-        @apply text-description font-medium text-textGray
-    }
-    .buttonTextVariant1{
-        @apply text-buttonTextVariant1
-    }
-    .buttonTextVariant2{
-        @apply text-buttonTextVariant2
-    }
-    .regular{
-        @apply text-regular
-    }
+
 }
 

@@ -1,12 +1,15 @@
 import React from 'react';
-import { HeroSection } from './sections';
-import Button from '../../utils/components/common/button/Button.tsx';
+import { CharactersSection, HomeHeroSection, LocationSection } from './sections';
+import EpisodesSection from './sections/episodes/EpisodesSection.tsx';
+
 
 export const Home: React.FC = () => {
   return (
-    <div className={'bg-light-background dark:bg-dark-background p-[10px]'}>
-      <HeroSection />
-      <Button>Sent request</Button>
-    </div>
+    <main className={'p-[10px]'}>
+      <HomeHeroSection />
+      <CharactersSection/>
+      <EpisodesSection/>
+      <LocationSection/>
+    </main>
   );
 };
