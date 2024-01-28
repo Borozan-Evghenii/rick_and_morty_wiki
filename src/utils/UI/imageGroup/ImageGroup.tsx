@@ -11,7 +11,7 @@ interface ImageGroupProps {
 
 export const ImageGroup :React.FC<ImageGroupProps>= ({data}) => {
   return (
-    <div className={'flex overflow-hidden pr-3 '}>
+    <div className={'flex pr-3 max-w-full '}>
       {
         data?.map(item => (
           <div key={item.id} className={' rounded-full w-10 h-10 overflow-hidden mr-[-10px]'}>
