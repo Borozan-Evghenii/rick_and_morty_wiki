@@ -35,7 +35,7 @@ export const EpisodeCard : React.FC= () => {
     <div className={'bg-light-thirty dark:bg-dark-thirty p-5 rounded-[20px] flex flex-col gap-5'}>
       <div className={'flex flex-col'}>
         <div className={'flex items-center justify-between flex-wrap'}>
-          <h3 className={'title4'}>Lawnmower Dog</h3>
+          <h3 className={'title4-bold mr-5'}>Lawnmower Dog</h3>
           <h3 className={'title4'}>S01E02</h3>
         </div>
         <p className={'regular text-light-secondary dark:text-dark-secondary'}>December 9, 2013</p>

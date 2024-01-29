@@ -11,17 +11,12 @@ export const HomeHeroSection : React.FC= () => {
       <div
         className={'w-full h-full bg-cover absolute left-0 right-0 top-0 bottom-0 text-white'}
         style={{ backgroundImage: 'url(https://rickandmortyapi.com/api/character/avatar/1.jpeg)' }}
-      >
-      </div>
-      <div
-        className={' w-[100vw] h-[100vh] absolute left-0 right-0 top-0 bottom-0 backdrop-blur-2xl bg-light-primary/40 '}>
-
-      </div>
-
+      ></div>
+      <div className={' h-[100vh] absolute left-0 right-0 top-0 bottom-0 backdrop-blur-2xl bg-light-primary/40 '}></div>
       <h1
-        className={'text-white title text-center px-[20px] relative md:text-[150px]'}
+        className={'text-white title relative'}
       >Morty’s Girlfriend</h1>
-      <div className={'absolute top-1/2 left-1/2 transform translate-x-[-50%] translate-y-[-50%]'}>
+      <div className={' absolute top-1/2 left-0 right-0 -translate-y-1/2 p-10 flex justify-center'}>
         <CharacterCard/>
       </div>
     </div>

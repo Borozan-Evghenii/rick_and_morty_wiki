@@ -4,14 +4,16 @@ import { getProps } from '../../../../@types';
 interface ButtonProps extends getProps<'button'> {
   children?: string;
   icon?: React.ReactNode;
+  className?: string
 }
 
-export const Button: React.FC<ButtonProps> = ({ children, icon ,...props}) => {
+export const Button: React.FC<ButtonProps> = ({ children, icon,className ,...props}) => {
 
 
   return (
     <button
       className={`
+      flex-nowrap
       hover:bg-light-hover
       dark:hover:bg-dark-hover
       flex gap-[10px] 
@@ -23,6 +25,7 @@ export const Button: React.FC<ButtonProps> = ({ children, icon ,...props}) => {
       bg-light-accent 
       dark:bg-dark-accent
       whitespace-nowrap
+      ${className}
       `}
       {...props}
     >

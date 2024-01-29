@@ -11,7 +11,7 @@ export const Header: React.FC = () => {
   const { isDark, toggleTheme } = useTheme();
 
   return (
-    <header className="fixed top-0 left-auto right-auto w-full pt-[20px] px-[20px] z-50">
+    <header className="fixed top-0 left-auto right-auto w-full pt-[20px] px-5 z-50">
       <div className="w-full max-w-[750px] mx-auto bg-light-background dark:bg-dark-background px-[13px] py-[10px] rounded-full border border-light-secondary dark:border-dark-secondary ">
         <div className="flex justify-between items-center">
           <Link to={'/'}>
