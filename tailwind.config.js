@@ -18,6 +18,9 @@ export default {
       fontFamily:{
         sans: ['Syne', 'sans-serif']
       },
+      screens: {
+        xs: '450px'
+      },
       colors:{
         light:{
           background: '#ffffff',

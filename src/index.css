@@ -20,7 +20,7 @@
         @apply  after:w-full
     }
     .app-container {
-        @apply p-5 pt-[40px] flex flex-col gap-10
+        @apply p-0 sm:p-5 pt-[40px] flex flex-col gap-10
     }
     .title{
         @apply text-title font-extrabold leading-tight
