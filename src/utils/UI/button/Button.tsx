@@ -12,7 +12,6 @@ export const Button: React.FC<ButtonProps> = ({ children, icon ,...props}) => {
   return (
     <button
       className={`
-      transition
       hover:bg-light-hover
       dark:hover:bg-dark-hover
       flex gap-[10px] 
