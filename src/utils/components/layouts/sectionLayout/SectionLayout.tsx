@@ -11,9 +11,9 @@ interface SectionLayout{
 export const SectionLayout :React.FC<SectionLayout> = ({title, children,link,...props}) => {
   return (
     <div className={'app-container'} {...props}>
-      <div className={'flex items-center justify-between'}>
+      <div className={'grid grid-cols-1 justify-items-start xs:items-center xs:grid-cols-2  gap-2'}>
         <h2 className={'title3'}>{title}{link}</h2>
-        <Button icon={<FiArrowUpRight />}>View all</Button>
+        <Button icon={<FiArrowUpRight />} className={'xs:justify-self-end'}>View all</Button>
       </div>
         {children}
     </div>

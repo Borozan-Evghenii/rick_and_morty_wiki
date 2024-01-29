@@ -33,7 +33,7 @@ export const LocationCard: React.FC = () => {
   return (
     <div className={'flex flex-col gap-5 bg-light-thirty dark:bg-dark-thirty p-5 rounded-[20px] items-start'}>
       <div className={'flex flex-col gap-2'}>
-        <h3 className={'title4'}>Earth (C-137)</h3>
+        <h3 className={'title4-bold'}>Earth (C-137)</h3>
         <p className={'title4'}>🪐 Planet</p>
         <p className={'regular text-light-secondary dark:text-dark-secondary'}>Dimension: {'unknown'}</p>
 
