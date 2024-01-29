@@ -7,8 +7,10 @@ interface GridLayoutProps {
 
 
 export const GridLayout :React.FC<GridLayoutProps>= ({columns, children}) => {
+  const col = columns? `grid-cols-${columns}` : 'grid-cols-4'
+
   return (
-    <div className={`grid grid-cols-${columns?columns:'4'} gap-5`}>
+    <div className={`grid ${col} gap-5`}>
       {children}
     </div>
   );
