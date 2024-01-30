@@ -13,9 +13,6 @@ interface SelectProps<T> {
 
 export const Select = <T extends { id: string, value: string }>({ data, onSelect, prefix, icon }: SelectProps<T>) => {
 
-  //TODO: Click outside need to return ref and toggle state for open/close
-  //TODO: useInput hook
-
   const onSelectDropdownItem = (event: React.MouseEvent<HTMLDivElement>, value: string) => {
     selectedValue.onChangeValue(value);
     setShowDropdown(false);
