@@ -20,7 +20,7 @@ export const Header: React.FC = () => {
           <nav className="hidden items-center sm:flex sm:gap-10 ">
             {
               routes.map(route => {
-                if (route.path !== '/') {
+                if (route.path !== '/' && route.toNavigation) {
                   return (<Link to={route.path} key={route.path}
                                 className={`link ${route.path === location.pathname && 'linkActive'}`}>
                     {route.name}
