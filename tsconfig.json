@@ -18,8 +18,31 @@
     "strict": true,
     "noUnusedLocals": true,
     "noUnusedParameters": true,
-    "noFallthroughCasesInSwitch": true
+    "noFallthroughCasesInSwitch": true,
+    "baseUrl": ".",
+    "paths": {
+      "@components": [
+        "./src/utils/components"
+      ],
+      "@layouts": [
+        "./src/utils/components/layouts"
+      ],
+      "@pages": [
+        "./src/pages"
+      ],
+      "@UI": [
+        "./src/utils/UI"
+      ],
+      "@hooks": [
+        "./src/utils/hooks"
+      ]
+    }
   },
-  "include": ["src"],
+  //"exclude": ["node_modules"],
+  "include": [
+    "next-env.d.ts",
+    "**/*.ts",
+    "**/*.tsx"
+  ],
   "references": [{ "path": "./tsconfig.node.json" }]
 }

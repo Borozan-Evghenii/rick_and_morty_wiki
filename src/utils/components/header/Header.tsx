@@ -1,7 +1,7 @@
 import React from 'react';
 import { Link, useLocation } from 'react-router-dom';
 import { routes } from '../../routes/routes.ts';
-import { useTheme } from '../../hooks/useTheme/useTheme.ts';
+import { useTheme } from '@hooks';
 import { CiDark, CiLight } from 'react-icons/ci';
 import { Logo } from '../../UI/icon';
 

@@ -1,5 +1,5 @@
 import React from 'react';
-import { PageLayout } from '../../utils/components/layouts';
+import { PageLayout } from '@layouts';
 
 export const Characters: React.FC = () => {
   return (

@@ -1,5 +1,5 @@
 import React from 'react';
-import { Button, ImageGroup } from '../../UI';
+import { Button, ImageGroup } from '@UI';
 import { FiArrowUpRight } from 'react-icons/fi';
 
 const mockData = [

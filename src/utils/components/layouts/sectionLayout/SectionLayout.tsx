@@ -1,5 +1,5 @@
 import React from 'react';
-import { Button } from '../../../UI';
+import { Button } from '@UI';
 import { FiArrowUpRight } from 'react-icons/fi';
 
 interface SectionLayout{
