@@ -7,7 +7,7 @@ import { useOnClickOutside } from '@hooks';
 interface AutocompleteProps<T> {
   icon?: React.ReactNode;
   data: T[];
-  onChange: (value: string) => void;
+  onChange: (event: React.MouseEvent<HTMLDivElement>, value: string) => void;
 }
 
 export const Autocomplete = <T extends { id: string, value: string }>({
@@ -31,21 +31,19 @@ export const Autocomplete = <T extends { id: string, value: string }>({
         onChange={(event) => {
           setInputValue(event.target.value);
         }}
-        onFocus={(event) => {
-          event.stopPropagation();
+        onFocus={() => {
           setShowDropDown(prev => !prev);
         }}
         iconStart={icon}
       />
       <DropDown
         data={filteredData}
-        onSelect={(value) => {
-          onChange(value);
+        onSelect={(event, value) => {
+          onChange(event, value);
           setInputValue(value);
           setShowDropDown(prev => !prev);
         }}
         show={showDropDown}
-        className={'absolute top-[100%] left-0 right-0'}
       />
     </div>
   );

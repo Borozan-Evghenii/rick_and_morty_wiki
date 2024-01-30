@@ -1,11 +1,12 @@
 import { DropDownItem } from './dropDownItem/DropDownItem.tsx';
+import React from 'react';
 
 
 interface DropDownProps<T> {
   show: boolean;
   className?: string;
   data: T[];
-  onSelect: (item: string) => void;
+  onSelect: (event: React.MouseEvent<HTMLDivElement>, value: string) => void;
 }
 
 export const DropDown = <T extends { id: string, value: string }>({
@@ -15,17 +16,17 @@ export const DropDown = <T extends { id: string, value: string }>({
                                                                     onSelect
                                                                   }: DropDownProps<T>) => {
 
-  const onSelectItem = (value: string) => {
-    onSelect(value);
+  const onSelectItem = (event: React.MouseEvent<HTMLDivElement>, value: string) => {
+    onSelect(event, value);
   };
 
   return show && (
     <div
-      className={`flex flex-col mt-1 rounded-lg border border-light-accent dark:border-dark-accent overflow-hidden ${className}`}>
+      className={`flex flex-col mt-1 rounded-lg border border-light-accent dark:border-dark-accent overflow-hidden absolute top-[100%] left-0 right-0 ${className}`}>
       {data.map((item) =>
         <DropDownItem
           key={item.id}
-          onClick={() => onSelectItem(item.value)}
+          onClick={(event) => onSelectItem(event, item.value)}
         >
           {item.value}
         </DropDownItem>)}
