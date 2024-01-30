@@ -1,17 +1,20 @@
 import React from 'react';
-import { getProps } from '../../../../@types';
+import { Link } from 'react-router-dom';
 
-interface ButtonProps extends getProps<'button'> {
-  children?: string;
+
+interface LinkButtonProps {
+  children?: React.ReactNode;
   icon?: React.ReactNode;
   className?: string
+  href: string;
 }
 
-export const Button: React.FC<ButtonProps> = ({ children, icon,className ,...props}) => {
+export const LinkButton: React.FC<LinkButtonProps> = ({ href, children, icon, className, ...props }) => {
 
 
   return (
-    <button
+    <Link
+      to={href}
       className={`
       flex-nowrap
       hover:bg-light-hover
@@ -33,6 +36,6 @@ export const Button: React.FC<ButtonProps> = ({ children, icon,className ,...pro
       {icon && (<div>
         {icon}
       </div>)}
-    </button>
+    </Link>
   );
 };

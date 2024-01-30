@@ -1,5 +1,5 @@
 import React from 'react';
-import { Button, ImageGroup } from '@UI';
+import { ImageGroup, LinkButton } from '@UI';
 import { FiArrowUpRight } from 'react-icons/fi';
 
 const mockData = [
@@ -42,7 +42,8 @@ export const EpisodeCard : React.FC= () => {
       </div>
       <div className={'flex items-center gap-5 flex-wrap'}>
         <ImageGroup data={mockData}/>
-        <Button icon={<FiArrowUpRight color={'fill-light-secondary dark:fill-dark-secondary'} />} >{`and ${mockData.length} other characters`}</Button>
+        <LinkButton href={'./episode/id'} icon={<FiArrowUpRight
+          color={'fill-light-secondary dark:fill-dark-secondary'} />}>{`and ${mockData.length} other characters`}</LinkButton>
       </div>
     </div>
   );
