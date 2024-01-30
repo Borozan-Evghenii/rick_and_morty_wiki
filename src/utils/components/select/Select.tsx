@@ -22,10 +22,9 @@ export const Select = <T extends { id: string, value: string }>({ data, onSelect
     onSelect(event, value);
   };
 
-  const componentRef = React.useRef(null);
   const [showDropdown, setShowDropdown] = React.useState(false);
   const [inputValue, setInputValue] = React.useState('');
-  useOnClickOutside(componentRef, () => setShowDropdown(false));
+  const { componentRef } = useOnClickOutside(() => setShowDropdown(false));
   return (
 
     <div className={'relative'} ref={componentRef}>

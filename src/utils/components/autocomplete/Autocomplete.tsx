@@ -17,8 +17,7 @@ export const Autocomplete = <T extends { id: string, value: string }>({
                                                                       }: AutocompleteProps<T>) => {
   const [showDropDown, setShowDropDown] = React.useState<boolean>(false);
   const [inputValue, setInputValue] = React.useState<string>('');
-  const componentRef = React.useRef<HTMLDivElement>(null);
-  useOnClickOutside(componentRef, () => setShowDropDown(false));
+  const { componentRef } = useOnClickOutside(() => setShowDropDown(false));
 
   const filteredData = React.useMemo(() => {
     return data.filter(item => item.value.toLowerCase().includes(inputValue.toLowerCase()));

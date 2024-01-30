@@ -1,11 +1,10 @@
 import React from 'react';
-import { fixMe } from '../../../../@types';
 
-export const useOnClickOutside = (componentRef: fixMe, callback: () => void) => {
-
+export const useOnClickOutside = (callback: () => void) => {
+  const componentRef = React.useRef<HTMLDivElement>(null);
   React.useEffect(() => {
-    const handleClickOutside = (event: Event) => {
-      if (componentRef.current && !componentRef.current.contains(event.target)) {
+    const handleClickOutside = (event: MouseEvent | TouchEvent) => {
+      if (componentRef.current && !componentRef.current.contains(event.target as HTMLDivElement)) {
         callback();
       }
     };
@@ -16,6 +15,7 @@ export const useOnClickOutside = (componentRef: fixMe, callback: () => void) => 
       document.removeEventListener('click', handleClickOutside);
       document.addEventListener('touchstart', handleClickOutside);
     };
-  }, [componentRef]);
+  }, [callback]);
 
+  return { componentRef };
 };
