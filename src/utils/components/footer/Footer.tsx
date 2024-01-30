@@ -1,5 +1,5 @@
 import React from 'react';
-import { FooterInput } from '../../UI';
+import { FooterInput } from '@UI';
 
 export const Footer :React.FC= () => {
   return (

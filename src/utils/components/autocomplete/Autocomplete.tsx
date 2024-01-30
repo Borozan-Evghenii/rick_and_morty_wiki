@@ -1,7 +1,7 @@
 import React from 'react';
-import { Input } from '../../UI';
+import { Input } from '@UI';
 import { DropDown } from '../dropdown/DropDown.tsx';
-import { useOnClickOutside } from '../../hooks';
+import { useOnClickOutside } from '@hooks';
 
 
 interface AutocompleteProps<T> {
@@ -35,7 +35,7 @@ export const Autocomplete = <T extends { id: string, value: string }>({
           event.stopPropagation();
           setShowDropDown(prev => !prev);
         }}
-        icon={icon}
+        iconStart={icon}
       />
       <DropDown
         data={filteredData}
