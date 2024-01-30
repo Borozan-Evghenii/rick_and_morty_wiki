@@ -1,5 +1,5 @@
 import React from 'react';
-import { Button } from '@UI';
+import { LinkButton } from '@UI';
 import { FiArrowUpRight } from 'react-icons/fi';
 
 export const CharacterCard :React.FC = () => {
@@ -16,7 +16,8 @@ export const CharacterCard :React.FC = () => {
             <div   className={'block rounded-full w-2 h-2 bg-red'}></div>
           </div>
         </div>
-        <Button icon={<FiArrowUpRight color={'fill-light-secondary dark:fill-dark-secondary'} />}/>
+        <LinkButton href={'character/id'}
+                    icon={<FiArrowUpRight color={'fill-light-secondary dark:fill-dark-secondary'} />} />
       </div>
     </div>
   );

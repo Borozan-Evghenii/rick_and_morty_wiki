@@ -1,5 +1,5 @@
 import React from 'react';
-import { Button, ImageGroup } from '@UI';
+import { ImageGroup, LinkButton } from '@UI';
 import { FiArrowUpRight } from 'react-icons/fi';
 
 const mockData = [
@@ -39,8 +39,8 @@ export const LocationCard: React.FC = () => {
 
       </div>
       <ImageGroup data={mockData} />
-      <Button icon={<FiArrowUpRight
-        color={'fill-light-secondary dark:fill-dark-secondary'} />}>{`and ${mockData.length} other characters`}</Button>
+      <LinkButton href={'location/id'} icon={<FiArrowUpRight
+        color={'fill-light-secondary dark:fill-dark-secondary'} />}>{`and ${mockData.length} other characters`}</LinkButton>
     </div>
   );
 };
