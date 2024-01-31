@@ -1,23 +1,21 @@
 import React from 'react';
-import { getProps } from '../../../../@types';
 
-interface InputProps extends getProps<'input'> {
+import type { GetProps } from '../../../../@types';
+
+interface InputProps extends GetProps<'input'> {
   iconStart?: React.ReactNode;
   iconEnd?: React.ReactNode;
 }
 
-export const Input: React.FC<InputProps> = ({ iconStart, iconEnd, ...props }) => {
-  return (
-    <div
-      className={'has-[:focus]:border-light-primary dark:has-[:focus]:border-dark-primary gap-2.5 border border-light-accent dark:border-dark-accent rounded-lg flex items-stretch justify-start h-[48px] overflow-hidden px-[12px]'}>
-      {iconStart}
-      <input
-        {...props}
-        placeholder="Enter name"
-        type="text"
-        className={' text-regular truncate ... w-full outline-0 bg-transparent placeholder:text-light-secondary dark:placeholder:text-dark-secondary focus:'}
-      />
-      {iconEnd}
-    </div>
-  );
-};
+export const Input: React.FC<InputProps> = ({ iconStart, iconEnd, ...props }) => (
+  <div className="flex h-[48px] items-stretch justify-start gap-2.5 overflow-hidden rounded-lg border border-light-accent px-[12px] has-[:focus]:border-light-primary dark:border-dark-accent dark:has-[:focus]:border-dark-primary">
+    {iconStart}
+    <input
+      {...props}
+      className=" ... focus: w-full truncate bg-transparent text-regular outline-0 placeholder:text-light-secondary dark:placeholder:text-dark-secondary"
+      placeholder="Enter name"
+      type="text"
+    />
+    {iconEnd}
+  </div>
+);

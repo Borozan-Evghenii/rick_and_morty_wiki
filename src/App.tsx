@@ -1,18 +1,18 @@
-import './index.css';
+import { Footer, Header } from '@components';
 import React from 'react';
 import { Outlet } from 'react-router-dom';
- import { Footer, Header } from './utils/components';
+
 import { AppRouter } from './utils/routes/appRouter/AppRouter.tsx';
 
-const App: React.FC = () => {
-  return (
-    <>
-      <Header />
-      <AppRouter />
-      <Outlet />
-      <Footer/>
-    </>
-  );
-};
+import './index.css';
+
+const App: React.FC = () => (
+  <>
+    <Header />
+    <AppRouter />
+    <Outlet />
+    <Footer />
+  </>
+);
 
 export default App;

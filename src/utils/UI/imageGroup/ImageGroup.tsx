@@ -2,23 +2,18 @@ import React from 'react';
 
 interface ImageGroupProps {
   data?: {
-    id:string
-    name: string
-    image:string
-  }[]
+    id: string;
+    name: string;
+    image: string;
+  }[];
 }
 
-
-export const ImageGroup :React.FC<ImageGroupProps>= ({data}) => {
-  return (
-    <div className={'flex pr-3 max-w-full '}>
-      {
-        data?.map(item => (
-          <div key={item.id} className={' rounded-full w-10 h-10 overflow-hidden mr-[-10px]'}>
-            <img src={item.image} alt={item.name} />
-          </div>
-        ))
-      }
-    </div>
-  );
-};
+export const ImageGroup: React.FC<ImageGroupProps> = ({ data }) => (
+  <div className="flex max-w-full pr-3 ">
+    {data?.map((item) => (
+      <div key={item.id} className=" mr-[-10px] h-10 w-10 overflow-hidden rounded-full">
+        <img alt={item.name} src={item.image} />
+      </div>
+    ))}
+  </div>
+);

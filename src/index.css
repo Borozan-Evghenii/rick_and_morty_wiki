@@ -4,42 +4,38 @@
 @tailwind components;
 @tailwind utilities;
 
-
 @layer base {
-
-    body {
-        @apply text-regular dark:text-dark-primary bg-light-background dark:bg-dark-background
-    }
+  body {
+    @apply text-regular dark:text-dark-primary bg-light-background dark:bg-dark-background;
+  }
 }
 
 @layer components {
-    .link{
-        @apply text-light-primary dark:text-dark-primary after:content-[''] after:top-0 after:w-0 after:block after:h-[1px] after:bg-light-primary dark:after:bg-dark-primary hover:after:w-full after:transition-all
-    }
-    .linkActive{
-        @apply  after:w-full
-    }
-    .app-container {
-        @apply p-0 sm:p-5 pt-[40px] flex flex-col gap-10
-    }
-    .title{
-        @apply leading-tight text-5xl xs:text-6xl sm:text-7xl md:text-9xl font-extrabold text-center
-    }
-    .title2{
-        @apply text-title2 font-bold text-4xl xs:text-6xl sm:text-7xl md:text-title2 text-center
-    }
-    .title3{
-        @apply text-title3 font-medium
-    }
-    .title4{
-        @apply text-title4
-    }
-    .title4-bold{
-        @apply text-title4 font-bold
-    }
-    .title5{
-        @apply text-title5 font-semibold
-    }
-
+  .link {
+    @apply text-light-primary dark:text-dark-primary after:content-[''] after:top-0 after:w-0 after:block after:h-[1px] after:bg-light-primary dark:after:bg-dark-primary hover:after:w-full after:transition-all;
+  }
+  .linkActive {
+    @apply after:w-full;
+  }
+  .app-container {
+    @apply p-0 sm:p-5 pt-[40px] flex flex-col gap-10;
+  }
+  .title {
+    @apply leading-tight text-5xl xs:text-6xl sm:text-7xl md:text-9xl font-extrabold text-center;
+  }
+  .title2 {
+    @apply text-title2 font-bold text-4xl xs:text-6xl sm:text-7xl md:text-title2 text-center;
+  }
+  .title3 {
+    @apply text-title3 font-medium;
+  }
+  .title4 {
+    @apply text-title4;
+  }
+  .title4-bold {
+    @apply text-title4 font-bold;
+  }
+  .title5 {
+    @apply text-title5 font-semibold;
+  }
 }
-

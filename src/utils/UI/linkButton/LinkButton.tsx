@@ -1,41 +1,41 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
 
-
 interface LinkButtonProps {
-  children?: React.ReactNode;
+  children?: React.ReactNode | string;
   icon?: React.ReactNode;
-  className?: string
+  className?: string;
   href: string;
 }
 
-export const LinkButton: React.FC<LinkButtonProps> = ({ href, children, icon, className, ...props }) => {
-
-
-  return (
-    <Link
-      to={href}
-      className={`
+export const LinkButton: React.FC<LinkButtonProps> = ({
+  href,
+  children,
+  icon,
+  className,
+  ...props
+}) => (
+  <Link
+    to={href}
+    className={`
+      flex
+      cursor-pointer
       flex-nowrap
-      hover:bg-light-hover
-      dark:hover:bg-dark-hover
-      flex gap-[10px] 
-      items-center 
-      py-[10px] 
-      px-[11px] 
-      cursor-pointer 
+      items-center gap-[10px] 
+      whitespace-nowrap 
       rounded-full 
       bg-light-accent 
+      px-[11px] 
+      py-[10px] 
+      hover:bg-light-hover 
       dark:bg-dark-accent
-      whitespace-nowrap
+      dark:hover:bg-dark-hover
       ${className}
       `}
-      {...props}
-    >
-      {children ? `${children}` : ''}
-      {icon && (<div>
-        {icon}
-      </div>)}
-    </Link>
-  );
-};
+    {...props}
+  >
+    {/* eslint-disable-next-line @typescript-eslint/no-base-to-string,@typescript-eslint/restrict-template-expressions */}
+    {children ? `${children}` : ''}
+    {icon && <div>{icon}</div>}
+  </Link>
+);

@@ -1,20 +1,28 @@
-import { Characters, CharacterSingle, Episodes, EpisodeSingle, Home, Locations, LocationSingle } from '@pages';
-import { fixMe } from '../../../@types';
+import {
+  Characters,
+  CharacterSingle,
+  Episodes,
+  EpisodeSingle,
+  Home,
+  Locations,
+  LocationSingle
+} from '@pages';
 
+import type { FixMe } from '../../../@types';
 
-interface routes{
-  path: string
-  element: React.ComponentType<fixMe>;
+interface Routes {
+  path: string;
+  element: React.ComponentType<FixMe>;
   name?: string;
   toNavigation: boolean;
 }
 
-export const routes: routes[] = [
-  { path: '/', element: Home, name: 'Home', toNavigation: true },
-  { path: '/characters', element: Characters, name: 'Characters', toNavigation: true },
-  { path: '/episodes', element: Episodes, name: 'Episodes', toNavigation: true },
-  { path: '/locations', element: Locations, name: 'Locations', toNavigation: true },
-  { path: 'episode/:id', element: EpisodeSingle, toNavigation: false },
-  { path: 'location/:id', element: LocationSingle, toNavigation: false },
-  { path: 'character/:id', element: CharacterSingle, toNavigation: false }
-]
+export const routes: Routes[] = [
+  { element: Home, name: 'Home', path: '/', toNavigation: true },
+  { element: Characters, name: 'Characters', path: '/characters', toNavigation: true },
+  { element: Episodes, name: 'Episodes', path: '/episodes', toNavigation: true },
+  { element: Locations, name: 'Locations', path: '/locations', toNavigation: true },
+  { element: EpisodeSingle, path: 'episode/:id', toNavigation: false },
+  { element: LocationSingle, path: 'location/:id', toNavigation: false },
+  { element: CharacterSingle, path: 'character/:id', toNavigation: false }
+];

@@ -1,41 +1,47 @@
-import React from 'react';
-import { Link, useLocation } from 'react-router-dom';
-import { routes } from '../../routes/routes.ts';
 import { useTheme } from '@hooks';
+import React from 'react';
 import { CiDark, CiLight } from 'react-icons/ci';
-import { Logo } from '../../UI/icon';
+import { Link, useLocation } from 'react-router-dom';
 
+import { Logo } from '../../UI/icon';
+import { routes } from '../../routes/routes.ts';
 
 export const Header: React.FC = () => {
   const location = useLocation();
   const { isDark, toggleTheme } = useTheme();
 
   return (
-    <header className="fixed top-0 left-auto right-auto w-full pt-[20px] px-5 z-50">
-      <div className="w-full max-w-[750px] mx-auto bg-light-background dark:bg-dark-background px-[13px] py-[10px] rounded-full border border-light-secondary dark:border-dark-secondary ">
-        <div className="flex justify-between items-center">
-          <Link to={'/'}>
-            <Logo className={'fill-light-primary dark:fill-dark-primary'} width={'40'} height={'40'} />
+    <header className="fixed left-auto right-auto top-0 z-50 w-full px-5 pt-[20px]">
+      <div className="mx-auto w-full max-w-[750px] rounded-full border border-light-secondary bg-light-background px-[13px] py-[10px] dark:border-dark-secondary dark:bg-dark-background ">
+        <div className="flex items-center justify-between">
+          <Link to="/">
+            <Logo className="fill-light-primary dark:fill-dark-primary" height="40" width="40" />
           </Link>
           <nav className="hidden items-center sm:flex sm:gap-10 ">
-            {
-              routes.map(route => {
-                if (route.path !== '/' && route.toNavigation) {
-                  return (<Link to={route.path} key={route.path}
-                                className={`link ${route.path === location.pathname && 'linkActive'}`}>
+            {routes.map((route) => {
+              if (route.path !== '/' && route.toNavigation) {
+                return (
+                  <Link
+                    key={route.path}
+                    className={`link ${route.path === location.pathname && 'linkActive'}`}
+                    to={route.path}
+                  >
                     {route.name}
-                  </Link>);
-                }
-              })
-            }
+                  </Link>
+                );
+              }
+              return null;
+            })}
           </nav>
           <button
-            className="w-[40px] h-[40px] bg-light-accent dark:bg-dark-accent rounded-full flex items-center justify-center "
+            className="flex h-[40px] w-[40px] items-center justify-center rounded-full bg-light-accent dark:bg-dark-accent "
             onClick={toggleTheme}
           >
-            {isDark ?
+            {isDark ? (
               <CiLight className="fill-light-primary dark:fill-dark-primary" />
-              : <CiDark className="fill-light-primary dark:fill-dark-primary " />}
+            ) : (
+              <CiDark className="fill-light-primary dark:fill-dark-primary " />
+            )}
           </button>
         </div>
       </div>

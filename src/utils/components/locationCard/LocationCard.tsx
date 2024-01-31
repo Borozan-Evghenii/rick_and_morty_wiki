@@ -1,46 +1,45 @@
-import React from 'react';
 import { ImageGroup, LinkButton } from '@UI';
+import React from 'react';
 import { FiArrowUpRight } from 'react-icons/fi';
 
 const mockData = [
   {
-    'id': '1',
-    'name': 'Rick Sanchez',
-    'image': 'https://rickandmortyapi.com/api/character/avatar/1.jpeg'
+    id: '1',
+    image: 'https://rickandmortyapi.com/api/character/avatar/1.jpeg',
+    name: 'Rick Sanchez'
   },
   {
-    'id': '2',
-    'name': 'Morty Smith',
-    'image': 'https://rickandmortyapi.com/api/character/avatar/2.jpeg'
+    id: '2',
+    image: 'https://rickandmortyapi.com/api/character/avatar/2.jpeg',
+    name: 'Morty Smith'
   },
   {
-    'id': '3',
-    'name': 'Summer Smith',
-    'image': 'https://rickandmortyapi.com/api/character/avatar/3.jpeg'
+    id: '3',
+    image: 'https://rickandmortyapi.com/api/character/avatar/3.jpeg',
+    name: 'Summer Smith'
   },
   {
-    'id': '4',
-    'name': 'Beth Smith',
-    'image': 'https://rickandmortyapi.com/api/character/avatar/4.jpeg'
+    id: '4',
+    image: 'https://rickandmortyapi.com/api/character/avatar/4.jpeg',
+    name: 'Beth Smith'
   },
   {
-    'id': '5',
-    'name': 'Jerry Smith',
-    'image': 'https://rickandmortyapi.com/api/character/avatar/5.jpeg'
+    id: '5',
+    image: 'https://rickandmortyapi.com/api/character/avatar/5.jpeg',
+    name: 'Jerry Smith'
   }
 ];
-export const LocationCard: React.FC = () => {
-  return (
-    <div className={'flex flex-col gap-5 bg-light-thirty dark:bg-dark-thirty p-5 rounded-[20px] items-start'}>
-      <div className={'flex flex-col gap-2'}>
-        <h3 className={'title4-bold'}>Earth (C-137)</h3>
-        <p className={'title4'}>🪐 Planet</p>
-        <p className={'regular text-light-secondary dark:text-dark-secondary'}>Dimension: {'unknown'}</p>
-
-      </div>
-      <ImageGroup data={mockData} />
-      <LinkButton href={'/location/3'} icon={<FiArrowUpRight
-        color={'fill-light-secondary dark:fill-dark-secondary'} />}>{`and ${mockData.length} other characters`}</LinkButton>
+export const LocationCard: React.FC = () => (
+  <div className="flex flex-col items-start gap-5 rounded-[20px] bg-light-thirty p-5 dark:bg-dark-thirty">
+    <div className="flex flex-col gap-2">
+      <h3 className="title4-bold">Earth (C-137)</h3>
+      <p className="title4">🪐 Planet</p>
+      <p className="regular text-light-secondary dark:text-dark-secondary">Dimension: unknown</p>
     </div>
-  );
-};
+    <ImageGroup data={mockData} />
+    <LinkButton
+      href="/location/3"
+      icon={<FiArrowUpRight color="fill-light-secondary dark:fill-dark-secondary" />}
+    >{`and ${mockData.length} other characters`}</LinkButton>
+  </div>
+);

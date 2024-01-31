@@ -1,16 +1,16 @@
 import React from 'react';
-import { getProps } from '../../../../../@types';
 
-interface DropDownItemProps extends getProps<'div'> {
+import type { GetProps } from '../../../../../@types';
+
+interface DropDownItemProps extends GetProps<'div'> {
   children: string;
 }
 
-export const DropDownItem: React.FC<DropDownItemProps> = ({ children, ...props }) => {
-  return (
-    <div
-      {...props}
-      className={'text-light-primary dark:text-dark-primary bg-light-background dark:bg-dark-background hover:cursor-pointer hover:bg-light-accent dark:hover:bg-dark-accent p-4'}>
-      {children}
-    </div>
-  );
-};
+export const DropDownItem: React.FC<DropDownItemProps> = ({ children, ...props }) => (
+  <div
+    {...props}
+    className="bg-light-background p-4 text-light-primary hover:cursor-pointer hover:bg-light-accent dark:bg-dark-background dark:text-dark-primary dark:hover:bg-dark-accent"
+  >
+    {children}
+  </div>
+);

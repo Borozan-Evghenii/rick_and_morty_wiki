@@ -1,17 +1,12 @@
 import React from 'react';
-import { routes } from '../routes.ts';
 import { Route, Routes } from 'react-router-dom';
 
-export const AppRouter: React.FC= () => {
-  return (
-    <>
-      {
-        <Routes>
-          {routes.map(route => (
-            <Route key={route.path} path={route.path} element={<route.element/>}></Route>
-          ))}
-        </Routes>
-      }
-    </>
-  );
-};
+import { routes } from '../routes.ts';
+
+export const AppRouter: React.FC = () => (
+  <Routes>
+    {routes.map((route) => (
+      <Route key={route.path} element={<route.element />} path={route.path} />
+    ))}
+  </Routes>
+);

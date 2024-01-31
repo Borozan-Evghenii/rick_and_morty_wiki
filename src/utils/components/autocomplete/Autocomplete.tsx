@@ -1,9 +1,9 @@
-import React from 'react';
 import { Input } from '@UI';
-import { DropDown } from '../dropdown/DropDown.tsx';
 import { useInput, useOnClickOutside } from '@hooks';
+import React from 'react';
 import { CiSearch } from 'react-icons/ci';
 
+import { DropDown } from '../dropdown/DropDown.tsx';
 
 interface AutocompleteProps<T> {
   icon?: React.ReactNode;
@@ -12,41 +12,41 @@ interface AutocompleteProps<T> {
   className?: string;
 }
 
-export const Autocomplete = <T extends { id: string, value: string }>({
-                                                                        data,
-                                                                        icon,
-                                                                        onChange, className
-
-                                                                      }: AutocompleteProps<T>) => {
+export const Autocomplete = <T extends { id: string; value: string }>({
+  data,
+  icon,
+  onChange,
+  className
+}: AutocompleteProps<T>) => {
   const [showDropDown, setShowDropDown] = React.useState<boolean>(false);
   const inputValue = useInput('');
   const { componentRef } = useOnClickOutside(() => setShowDropDown(false));
 
-  const filteredData = React.useMemo(() => {
-    return data.filter(item => item.value.toLowerCase().includes(inputValue.value.toLowerCase()));
-  }, [data, inputValue]);
+  const filteredData = React.useMemo(
+    () => data.filter((item) => item.value.toLowerCase().includes(inputValue.value.toLowerCase())),
+    [data, inputValue]
+  );
 
   return (
-    <div className={`relative ${className}`} ref={componentRef}>
+    <div ref={componentRef} className={`relative ${className}`}>
       <Input
-
+        iconStart={!icon ? <CiSearch className="h-full w-5" /> : icon}
         value={inputValue.value}
-        onChange={(event) => {
+        onChange={(event: React.ChangeEvent<HTMLInputElement>) => {
           inputValue.onChangeValue(event.target.value);
         }}
         onFocus={() => {
-          setShowDropDown(prev => !prev);
+          setShowDropDown((prev) => !prev);
         }}
-        iconStart={!icon ? <CiSearch className={'w-5 h-full'} /> : icon}
       />
       <DropDown
         data={filteredData}
+        show={showDropDown}
         onSelect={(event, value) => {
           onChange(event, value);
           inputValue.onChangeValue(value);
-          setShowDropDown(prev => !prev);
+          setShowDropDown((prev) => !prev);
         }}
-        show={showDropDown}
       />
     </div>
   );
