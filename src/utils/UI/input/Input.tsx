@@ -9,13 +9,13 @@ interface InputProps extends getProps<'input'> {
 export const Input: React.FC<InputProps> = ({ iconStart, iconEnd, ...props }) => {
   return (
     <div
-      className={'has-[:focus]:border-light-primary dark:has-[:focus]:border-dark-primary gap-2.5 mt-[40px] border border-light-accent dark:border-dark-accent rounded-lg flex items-stretch justify-start h-[48px] overflow-hidden px-[12px]'}>
+      className={'has-[:focus]:border-light-primary dark:has-[:focus]:border-dark-primary gap-2.5 border border-light-accent dark:border-dark-accent rounded-lg flex items-stretch justify-start h-[48px] overflow-hidden px-[12px]'}>
       {iconStart}
       <input
         {...props}
         placeholder="Enter name"
         type="text"
-        className={'w-full outline-0 bg-transparent placeholder:text-light-secondary dark:placeholder:text-dark-secondary focus:'}
+        className={' text-regular truncate ... w-full outline-0 bg-transparent placeholder:text-light-secondary dark:placeholder:text-dark-secondary focus:'}
       />
       {iconEnd}
     </div>

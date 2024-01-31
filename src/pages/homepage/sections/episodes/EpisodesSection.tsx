@@ -1,10 +1,10 @@
 import React from 'react';
 import { EpisodeCard } from '../../../../utils/components/episodeCard/EpisodeCard.tsx';
-import { GridLayout, SectionLayout } from '../../../../utils/components/layouts';
+import { GridLayout, HomeSectionLayout } from '@layouts';
 
 const EpisodesSection : React.FC = () => {
   return (
-    <SectionLayout title={'Episodes'}>
+    <HomeSectionLayout link={'/episodes'} title={'Episodes'}>
       <GridLayout columns={'3'}>
         <EpisodeCard />
         <EpisodeCard />
@@ -13,7 +13,7 @@ const EpisodesSection : React.FC = () => {
         <EpisodeCard />
         <EpisodeCard />
       </GridLayout>
-    </SectionLayout>
+    </HomeSectionLayout>
   );
 };
 

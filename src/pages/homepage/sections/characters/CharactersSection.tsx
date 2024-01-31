@@ -1,11 +1,11 @@
 import React from 'react';
-import { GridLayout, SectionLayout } from '../../../../utils/components/layouts';
-import { CharacterCard } from '../../../../utils/components';
+import { GridLayout, HomeSectionLayout } from '@layouts';
+import { CharacterCard } from '@components';
 
 
 export const CharactersSection :React.FC= () => {
   return (
-    <SectionLayout title={'Characters'}>
+    <HomeSectionLayout link={'/characters'} title={'Characters'}>
       <GridLayout columns={'4'}>
         <CharacterCard />
         <CharacterCard />
@@ -16,6 +16,6 @@ export const CharactersSection :React.FC= () => {
         <CharacterCard />
         <CharacterCard />
       </GridLayout>
-    </SectionLayout>
+    </HomeSectionLayout>
   );
 };

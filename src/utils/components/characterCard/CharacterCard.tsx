@@ -16,7 +16,7 @@ export const CharacterCard :React.FC = () => {
             <div   className={'block rounded-full w-2 h-2 bg-red'}></div>
           </div>
         </div>
-        <LinkButton href={'character/id'}
+        <LinkButton href={'/character/3'}
                     icon={<FiArrowUpRight color={'fill-light-secondary dark:fill-dark-secondary'} />} />
       </div>
     </div>

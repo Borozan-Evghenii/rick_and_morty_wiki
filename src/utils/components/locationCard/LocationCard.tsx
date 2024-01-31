@@ -39,7 +39,7 @@ export const LocationCard: React.FC = () => {
 
       </div>
       <ImageGroup data={mockData} />
-      <LinkButton href={'location/id'} icon={<FiArrowUpRight
+      <LinkButton href={'/location/3'} icon={<FiArrowUpRight
         color={'fill-light-secondary dark:fill-dark-secondary'} />}>{`and ${mockData.length} other characters`}</LinkButton>
     </div>
   );
