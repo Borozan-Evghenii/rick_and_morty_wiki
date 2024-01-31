@@ -23,12 +23,18 @@ export const CharacterSingle: React.FC = () => {
               <li>Gender: Male</li>
             </ul>
             <ul className={'flex gap-2.5 flex-wrap'}>
-              <li><LinkButton href={'/'}
-                              icon={<FiArrowUpRight color={'fill-light-secondary dark:fill-dark-secondary'} />}>Origin:
-                ''Trunk World''</LinkButton></li>
-              <li><LinkButton href={'/'}
-                              icon={<FiArrowUpRight color={'fill-light-secondary dark:fill-dark-secondary'} />}>Current
-                location: ''Interdimensional Cable''</LinkButton></li>
+              <li>
+                <LinkButton
+                  href={'/location/3'}
+                  icon={<FiArrowUpRight color={'fill-light-secondary dark:fill-dark-secondary'} />}
+                >Origin: ''Trunk World''</LinkButton>
+              </li>
+              <li>
+                <LinkButton
+                  href={'/location/4'}
+                  icon={<FiArrowUpRight color={'fill-light-secondary dark:fill-dark-secondary'} />}
+                >Current location: ''Interdimensional Cable''</LinkButton>
+              </li>
             </ul>
           </div>
         </div>

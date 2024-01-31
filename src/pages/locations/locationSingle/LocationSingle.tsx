@@ -1,12 +1,31 @@
 import React from 'react';
-import { PageLayout } from '@layouts';
-import { HeroSection } from '@components';
+import { GridLayout, PageLayout, SectionLayout } from '@layouts';
+import { CharacterCard, HeroSection } from '@components';
 
 export const LocationSingle: React.FC = () => {
   return (
     <PageLayout>
       <HeroSection />
-      Location Single Page
+      <SectionLayout title={'Characters who live in this location'}>
+        <GridLayout>
+          <CharacterCard />
+          <CharacterCard />
+          <CharacterCard />
+          <CharacterCard />
+          <CharacterCard />
+          <CharacterCard />
+          <CharacterCard />
+          <CharacterCard />
+          <CharacterCard />
+          <CharacterCard />
+          <CharacterCard />
+          <CharacterCard />
+          <CharacterCard />
+          <CharacterCard />
+          <CharacterCard />
+          <CharacterCard />
+        </GridLayout>
+      </SectionLayout>
     </PageLayout>
   );
 };
