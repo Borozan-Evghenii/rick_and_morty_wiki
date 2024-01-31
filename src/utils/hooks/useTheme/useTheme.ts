@@ -4,26 +4,22 @@ import { useLocaleStorage } from '../useLocaleStorage/useLocaleStorage.ts';
 const themeKey = 'isDarkMode'
 export const useTheme = () => {
   const localeStore = useLocaleStorage()
-  const [isDark, setIsDark] = React.useState<boolean>(false);
+  const [isDark, setIsDark] = React.useState<boolean>(() => {
+    const isStoredDark = localeStore.getLocaleStorage(themeKey);
+    return isStoredDark !== null ? isStoredDark : false;
+  });
 
-  React.useLayoutEffect(() => {
-    const isStoredDark = localeStore.getLocaleStorage(themeKey)
-    if (!isStoredDark) {
-      localeStore.setLocaleStorage(themeKey, isDark);
-    } else {
-      console.log(isStoredDark);
-      isStoredDark ? window.document.documentElement.classList.add('dark') : '';
-    }
-  },[])
-
-  const toggleTheme =() => {
-    setIsDark(prev => !prev)
-    localeStore.setLocaleStorage(themeKey, isDark);
+  React.useEffect(() => {
     if (isDark) {
       window.document.documentElement.classList.add('dark');
     } else {
       window.document.documentElement.classList.remove('dark');
     }
+    localeStore.setLocaleStorage(themeKey, isDark);
+  }, [isDark])
+
+  const toggleTheme = () => {
+    setIsDark(prev => !prev);
   }
 
   return {
