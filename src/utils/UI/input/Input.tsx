@@ -15,7 +15,7 @@ export const Input: React.FC<InputProps> = ({ iconStart, iconEnd, ...props }) =>
         {...props}
         placeholder="Enter name"
         type="text"
-        className={'truncate ... w-full outline-0 bg-transparent placeholder:text-light-secondary dark:placeholder:text-dark-secondary focus:'}
+        className={' text-regular truncate ... w-full outline-0 bg-transparent placeholder:text-light-secondary dark:placeholder:text-dark-secondary focus:'}
       />
       {iconEnd}
     </div>

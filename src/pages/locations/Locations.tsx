@@ -1,6 +1,6 @@
 import React from 'react';
 import { Autocomplete, HeroSection, LocationCard, Select } from '@components';
-import { GridLayout, PageLayout, SectionLayout } from '@layouts';
+import { FilterLayout, GridLayout, PageLayout, SectionLayout } from '@layouts';
 
 const mockData = {
   search: [
@@ -31,16 +31,14 @@ export const Locations :React.FC= () => {
   return (
     <PageLayout>
       <HeroSection />
-      <SectionLayout>
-        <div className={'grid grid-cols-4 gap-5'}>
-          <Autocomplete className={'col-span-2'} data={mockData.search} onChange={() => {
+      <FilterLayout>
+        <Autocomplete className={'md:col-span-2 lg:col-span-3'} data={mockData.search} onChange={() => {
           }} />
           <Select prefix={'Type: '} data={mockData.type} onSelect={() => {
           }} />
           <Select prefix={'Dimension: '} data={mockData.dimension} onSelect={() => {
           }} />
-        </div>
-      </SectionLayout>
+      </FilterLayout>
       <SectionLayout>
         <GridLayout columns={'4'}>
           <LocationCard />

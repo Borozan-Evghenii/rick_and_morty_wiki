@@ -9,9 +9,16 @@ interface SelectProps<T> {
   onSelect: (event: React.MouseEvent<HTMLDivElement>, value: string) => void;
   prefix?: string;
   icon?: React.ReactNode;
+  className?: string;
 }
 
-export const Select = <T extends { id: string, value: string }>({ data, onSelect, prefix, icon }: SelectProps<T>) => {
+export const Select = <T extends { id: string, value: string }>({
+                                                                  data,
+                                                                  onSelect,
+                                                                  prefix,
+                                                                  icon,
+                                                                  className
+                                                                }: SelectProps<T>) => {
 
   const onSelectDropdownItem = (event: React.MouseEvent<HTMLDivElement>, value: string) => {
     selectedValue.onChangeValue(value);
@@ -24,9 +31,9 @@ export const Select = <T extends { id: string, value: string }>({ data, onSelect
   const { componentRef } = useOnClickOutside(() => setShowDropdown(false));
   return (
 
-    <div className={'relative'} ref={componentRef}>
+    <div className={`relative ${className}`} ref={componentRef}>
       <button
-        className={'min-w-[230px] w-full focus:border-light-primary dark:focus:border-dark-primary gap-2.5 border border-light-accent dark:border-dark-accent rounded-lg flex items-center justify-between h-[48px] overflow-hidden px-[12px]'}
+        className={' w-full focus:border-light-primary dark:focus:border-dark-primary gap-2.5 border border-light-accent dark:border-dark-accent rounded-lg flex items-center justify-between h-[48px] overflow-hidden px-[12px]'}
         onClick={() => setShowDropdown(true)}
       >
         <p className={'text-light-primary dark:text-dark-primary overflow-hidden truncate ...'}>

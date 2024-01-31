@@ -14,6 +14,7 @@ export const Episodes: React.FC = () => {
       <SectionLayout>
         <div className={'flex justify-end'}>
           <Select
+            className={'min-w-[230px]'}
             prefix={'Episode: '}
             data={selectData}
             onSelect={() => console.log('')}

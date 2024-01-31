@@ -1,12 +1,12 @@
 import React from 'react';
-import { GridLayout, PageLayout, SectionLayout } from '@layouts';
+import { FilterLayout, GridLayout, PageLayout, SectionLayout } from '@layouts';
 import { Autocomplete, CharacterCard, HeroSection, Select } from '@components';
 
 const mockData = {
   gender: [
     { id: '1', value: 'Male' },
-    { id: '1', value: 'Female' },
-    { id: '1', value: 'unknown' }
+    { id: '2', value: 'Female' },
+    { id: '3', value: 'unknown' }
   ],
   type: [
     { id: '1', value: 'Genetic experiment' },
@@ -36,34 +36,33 @@ export const Characters: React.FC = () => {
   return (
     <PageLayout>
       <HeroSection />
-      <SectionLayout>
-        <div className={'grid grid-cols-5 gap-5'}>
-          <Autocomplete
-            data={mockData.names}
-            onChange={(_, value) => console.log(value)}
-          />
-          <Select
-            prefix={'Status: '}
-            data={mockData.status}
-            onSelect={(_, value) => console.log(value)}
-          />
-          <Select
-            prefix={'Species: '}
-            data={mockData.species}
-            onSelect={(_, value) => console.log(value)}
-          />
-          <Select
-            prefix={'Type: '}
-            data={mockData.type}
-            onSelect={(_, value) => console.log(value)}
-          />
-          <Select
-            prefix={'Gender: '}
-            data={mockData.gender}
-            onSelect={(_, value) => console.log(value)}
-          />
-        </div>
-      </SectionLayout>
+      <FilterLayout>
+        <Autocomplete
+          className={'md:col-span-full lg:col-span-1'}
+          data={mockData.names}
+          onChange={(_, value) => console.log(value)}
+        />
+        <Select
+          prefix={'Status: '}
+          data={mockData.status}
+          onSelect={(_, value) => console.log(value)}
+        />
+        <Select
+          prefix={'Species: '}
+          data={mockData.species}
+          onSelect={(_, value) => console.log(value)}
+        />
+        <Select
+          prefix={'Type: '}
+          data={mockData.type}
+          onSelect={(_, value) => console.log(value)}
+        />
+        <Select
+          prefix={'Gender: '}
+          data={mockData.gender}
+          onSelect={(_, value) => console.log(value)}
+        />
+      </FilterLayout>
       <SectionLayout>
         <GridLayout>
           <CharacterCard />
