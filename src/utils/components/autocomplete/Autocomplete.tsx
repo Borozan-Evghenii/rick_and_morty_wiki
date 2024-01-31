@@ -2,18 +2,21 @@ import React from 'react';
 import { Input } from '@UI';
 import { DropDown } from '../dropdown/DropDown.tsx';
 import { useInput, useOnClickOutside } from '@hooks';
+import { CiSearch } from 'react-icons/ci';
 
 
 interface AutocompleteProps<T> {
   icon?: React.ReactNode;
   data: T[];
   onChange: (event: React.MouseEvent<HTMLDivElement>, value: string) => void;
+  className?: string;
 }
 
 export const Autocomplete = <T extends { id: string, value: string }>({
                                                                         data,
                                                                         icon,
-                                                                        onChange
+                                                                        onChange, className
+
                                                                       }: AutocompleteProps<T>) => {
   const [showDropDown, setShowDropDown] = React.useState<boolean>(false);
   const inputValue = useInput('');
@@ -24,8 +27,9 @@ export const Autocomplete = <T extends { id: string, value: string }>({
   }, [data, inputValue]);
 
   return (
-    <div className={'relative'} ref={componentRef}>
+    <div className={`relative ${className}`} ref={componentRef}>
       <Input
+
         value={inputValue.value}
         onChange={(event) => {
           inputValue.onChangeValue(event.target.value);
@@ -33,7 +37,7 @@ export const Autocomplete = <T extends { id: string, value: string }>({
         onFocus={() => {
           setShowDropDown(prev => !prev);
         }}
-        iconStart={icon}
+        iconStart={!icon ? <CiSearch className={'w-5 h-full'} /> : icon}
       />
       <DropDown
         data={filteredData}

@@ -26,10 +26,14 @@ export const Select = <T extends { id: string, value: string }>({ data, onSelect
 
     <div className={'relative'} ref={componentRef}>
       <button
-        className={' w-full focus:border-light-primary dark:focus:border-dark-primary gap-2.5 mt-[40px] border border-light-accent dark:border-dark-accent rounded-lg flex items-center justify-between h-[48px] overflow-hidden px-[12px]'}
+        className={'min-w-[230px] w-full focus:border-light-primary dark:focus:border-dark-primary gap-2.5 border border-light-accent dark:border-dark-accent rounded-lg flex items-center justify-between h-[48px] overflow-hidden px-[12px]'}
         onClick={() => setShowDropdown(true)}
       >
-        <p className={'text-light-primary dark:text-dark-primary'}>{prefix} {selectedValue.value}</p>
+        <p className={'text-light-primary dark:text-dark-primary overflow-hidden truncate ...'}>
+          <span className={selectedValue.value !== '' ? 'text-light-secondary dark:text-dark-secondary' : ''}>
+            {prefix}
+          </span>
+          {selectedValue.value}</p>
         {!icon && (<IoIosArrowDown
           className={`fill-light-primary dark:fill-dark-primary ${showDropdown ? 'rotate-180' : ''}`} />)}
 

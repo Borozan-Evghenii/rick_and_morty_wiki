@@ -1,29 +1,49 @@
-import { CiSearch } from 'react-icons/ci';
 import React from 'react';
-import { PageLayout } from '@layouts';
-import { Autocomplete, HeroSection, Select } from '@components';
-import EpisodesSection from '../homepage/sections/episodes/EpisodesSection.tsx';
+import { GridLayout, PageLayout, SectionLayout } from '@layouts';
+import { EpisodeCard, HeroSection, Select } from '@components';
 
 const selectData = [
-  { id: '1', value: 'Alive' },
-  { id: '2', value: 'Death' },
-  { id: '3', value: 'Unknown' }
+  { id: '1', value: 'SO01E' },
+  { id: '2', value: 'SO02E' },
+  { id: '3', value: 'SO03E' }
 ];
 export const Episodes: React.FC = () => {
   return (
     <PageLayout >
       <HeroSection />
-      <Autocomplete
-        onChange={value => console.log('@ episodes', value)}
-        data={[{ id: '1', value: 'Alive' }, { id: '2', value: 'Death' }, { id: '3', value: 'Unknown' }]}
-        icon={<CiSearch className={'w-5 h-full'} />}
-      />
-      <Select
-        prefix={'Type:'}
-        data={selectData}
-        onSelect={() => console.log('')}
-      />
-      <EpisodesSection />
+      <SectionLayout>
+        <div className={'flex justify-end'}>
+          <Select
+            prefix={'Episode: '}
+            data={selectData}
+            onSelect={() => console.log('')}
+          />
+        </div>
+      </SectionLayout>
+      <SectionLayout>
+        <GridLayout columns={'3'}>
+          <EpisodeCard />
+          <EpisodeCard />
+          <EpisodeCard />
+          <EpisodeCard />
+          <EpisodeCard />
+          <EpisodeCard />
+          <EpisodeCard />
+          <EpisodeCard />
+          <EpisodeCard />
+          <EpisodeCard />
+          <EpisodeCard />
+          <EpisodeCard />
+          <EpisodeCard />
+          <EpisodeCard />
+          <EpisodeCard />
+          <EpisodeCard />
+          <EpisodeCard />
+          <EpisodeCard />
+
+
+        </GridLayout>
+      </SectionLayout>
     </PageLayout>
   );
 };

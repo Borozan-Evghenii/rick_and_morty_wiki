@@ -22,7 +22,7 @@ export const DropDown = <T extends { id: string, value: string }>({
 
   return show && (
     <div
-      className={`flex flex-col mt-1 rounded-lg border border-light-accent dark:border-dark-accent overflow-hidden absolute top-[100%] left-0 right-0 ${className}`}>
+      className={`max-h-[200px] overflow-y-scroll flex flex-col mt-1 rounded-lg border border-light-accent dark:border-dark-accent overflow-hidden absolute top-[100%] left-0 right-0 ${className}`}>
       {data.map((item) =>
         <DropDownItem
           key={item.id}

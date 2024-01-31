@@ -1,21 +1,9 @@
 import React from 'react';
-import { LinkButton } from '@UI';
-import { FiArrowUpRight } from 'react-icons/fi';
 
-interface SectionLayout{
-  title: string
-  link: string;
-  children: React.ReactNode
-}
-
-export const SectionLayout :React.FC<SectionLayout> = ({title, children,link,...props}) => {
+export const SectionLayout: React.FC<{ children: React.ReactNode }> = ({ children }) => {
   return (
-    <div className={'app-container'} {...props}>
-      <div className={'grid grid-cols-1 justify-items-start xs:items-center xs:grid-cols-2  gap-2'}>
-        <h2 className={'title3'}>{title}{link}</h2>
-        <LinkButton href={link} icon={<FiArrowUpRight />} className={'xs:justify-self-end'}>View all</LinkButton>
-      </div>
-        {children}
-    </div>
+    <section className={'mt-[40px]'}>
+      {children}
+    </section>
   );
 };

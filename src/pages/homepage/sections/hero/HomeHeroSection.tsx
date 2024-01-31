@@ -1,5 +1,5 @@
 import React from 'react';
-import { CharacterCard } from '../../../../utils/components';
+import { CharacterCard } from '@components';
 
 export const HomeHeroSection : React.FC= () => {
   

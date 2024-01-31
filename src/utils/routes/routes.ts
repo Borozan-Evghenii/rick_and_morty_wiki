@@ -1,4 +1,4 @@
-import { Characters, Episodes, Home, Locations } from '@pages';
+import { Characters, CharacterSingle, Episodes, EpisodeSingle, Home, Locations, LocationSingle } from '@pages';
 import { fixMe } from '../../../@types';
 
 
@@ -14,7 +14,7 @@ export const routes: routes[] = [
   { path: '/characters', element: Characters, name: 'Characters', toNavigation: true },
   { path: '/episodes', element: Episodes, name: 'Episodes', toNavigation: true },
   { path: '/locations', element: Locations, name: 'Locations', toNavigation: true },
-  { path: '/episodes/:id', element: Episodes, toNavigation: false },
-  { path: '/location/:id', element: Locations, toNavigation: false },
-  { path: '/character/:id', element: Locations, toNavigation: false }
+  { path: 'episode/:id', element: EpisodeSingle, toNavigation: false },
+  { path: 'location/:id', element: LocationSingle, toNavigation: false },
+  { path: 'character/:id', element: CharacterSingle, toNavigation: false }
 ]
