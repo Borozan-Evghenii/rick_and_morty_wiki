@@ -6,25 +6,25 @@
 
 @layer base {
   body {
-    @apply text-regular dark:text-dark-primary bg-light-background dark:bg-dark-background;
+    @apply bg-light-background text-regular dark:bg-dark-background dark:text-dark-primary;
   }
 }
 
 @layer components {
   .link {
-    @apply text-light-primary dark:text-dark-primary after:content-[''] after:top-0 after:w-0 after:block after:h-[1px] after:bg-light-primary dark:after:bg-dark-primary hover:after:w-full after:transition-all;
+    @apply text-light-primary after:top-0 after:block after:h-[1px] after:w-0 after:bg-light-primary after:transition-all after:content-[''] hover:after:w-full dark:text-dark-primary dark:after:bg-dark-primary;
   }
   .linkActive {
     @apply after:w-full;
   }
   .app-container {
-    @apply p-0 sm:p-5 pt-[40px] flex flex-col gap-10;
+    @apply flex flex-col gap-10 p-0 pt-[40px] sm:p-5;
   }
   .title {
-    @apply leading-tight text-5xl xs:text-6xl sm:text-7xl md:text-9xl font-extrabold text-center;
+    @apply text-center text-5xl font-extrabold leading-tight xs:text-6xl sm:text-7xl md:text-9xl;
   }
   .title2 {
-    @apply text-title2 font-bold text-4xl xs:text-6xl sm:text-7xl md:text-title2 text-center;
+    @apply text-center text-4xl text-title2 font-bold xs:text-6xl sm:text-7xl md:text-title2;
   }
   .title3 {
     @apply text-title3 font-medium;

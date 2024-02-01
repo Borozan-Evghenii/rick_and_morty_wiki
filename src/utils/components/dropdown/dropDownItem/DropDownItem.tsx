@@ -1,7 +1,5 @@
 import React from 'react';
 
-import type { GetProps } from '../../../../../@types';
-
 interface DropDownItemProps extends GetProps<'div'> {
   children: string;
 }

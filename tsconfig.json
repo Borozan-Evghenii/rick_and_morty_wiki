@@ -5,6 +5,12 @@
     "lib": ["ES2020", "DOM", "DOM.Iterable"],
     "module": "ESNext",
     "skipLibCheck": true,
+    "plugins": [
+      {
+        "name": "@0no-co/graphqlsp",
+        "schema": "./**/*.schema.graphql"
+      }
+    ],
 
     /* Bundler mode */
     "moduleResolution": "bundler",
@@ -35,6 +41,9 @@
       ],
       "@hooks": [
         "./src/utils/hooks"
+      ],
+      "@types": [
+        "./@types"
       ]
     }
   },

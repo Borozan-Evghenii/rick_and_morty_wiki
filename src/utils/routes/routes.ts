@@ -8,8 +8,6 @@ import {
   LocationSingle
 } from '@pages';
 
-import type { FixMe } from '../../../@types';
-
 interface Routes {
   path: string;
   element: React.ComponentType<FixMe>;

@@ -1,6 +1,5 @@
 import React from 'react';
 
-import type { FixMe } from '../../../../@types';
 import { useLocaleStorage } from '../useLocaleStorage/useLocaleStorage.ts';
 
 const themeKey = 'isDarkMode';
