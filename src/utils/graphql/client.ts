@@ -1,7 +1,15 @@
-import { GraphQLClient } from 'graphql-request';
+// import { GraphQLClient } from 'graphql-request';
+//
+// import { getSdk } from './__generated__.ts';
+//
+// // @ts-ignore
+// const client = new GraphQLClient(`${import.meta.env.VITE_API_URL}graphql`);
+// export const gql = getSdk(client);
 
-import { getSdk } from './__generated__';
+//
+// const client = new ApolloClient({
+//   uri: 'https://flyby-router-demo.herokuapp.com/',
+//   cache: new InMemoryCache(),
+// });
 
-const client = new GraphQLClient(`https://rickandmortyapi.com/graphql`);
-export const gql = getSdk(client);
-export * from './__generated__';
+export * from './__generated__.ts';

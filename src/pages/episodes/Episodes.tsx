@@ -1,13 +1,12 @@
 import { EpisodeCard, HeroSection, Select } from '@components';
 import { GridLayout, PageLayout, SectionLayout } from '@layouts';
-import React from 'react';
 
 const selectData = [
   { id: '1', value: 'SO01E' },
   { id: '2', value: 'SO02E' },
   { id: '3', value: 'SO03E' }
 ];
-export const Episodes: React.FC = () => (
+export const Episodes = () => (
   <PageLayout>
     <HeroSection />
     <SectionLayout>

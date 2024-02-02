@@ -1,6 +1,5 @@
 import { Autocomplete, HeroSection, LocationCard, Select } from '@components';
 import { FilterLayout, GridLayout, PageLayout, SectionLayout } from '@layouts';
-import React from 'react';
 
 const mockData = {
   dimension: [
@@ -27,7 +26,7 @@ const mockData = {
   ]
 };
 
-export const Locations: React.FC = () => (
+export const Locations = () => (
   <PageLayout>
     <HeroSection />
     <FilterLayout>

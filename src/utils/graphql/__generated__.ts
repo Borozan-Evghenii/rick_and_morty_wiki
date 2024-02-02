@@ -1,8 +1,5 @@
-import type { GraphQLClient } from 'graphql-request';
-// eslint-disable-next-line @typescript-eslint/ban-ts-comment
-// @ts-expect-error
-import type { GraphQLClientRequestHeaders } from 'graphql-request/build/cjs/types';
-import gql from 'graphql-tag';
+import * as Apollo from '@apollo/client';
+import { gql } from '@apollo/client';
 
 export type Maybe<T> = T;
 export type InputMaybe<T> = T;
@@ -15,6 +12,7 @@ export type MakeEmpty<T extends { [key: string]: unknown }, K extends keyof T> =
 export type Incremental<T> =
   | T
   | { [P in keyof T]?: P extends ' $fragmentName' | '__typename' ? T[P] : never };
+const defaultOptions = {} as const;
 /** All built-in and custom scalars, mapped to their actual values */
 export type Scalars = {
   ID: { input: string; output: string };
@@ -201,51 +199,111 @@ export type QueryLocationsByIdsArgs = {
   ids: ReadonlyArray<Scalars['ID']['input']>;
 };
 
+export type CharacterCardFragmentFragment = {
+  readonly __typename?: 'Character';
+  readonly id: string;
+  readonly image: string;
+  readonly name: string;
+  readonly species: string;
+};
+
 export type GetCharactersQueryVariables = Exact<{ [key: string]: never }>;
 
 export type GetCharactersQuery = {
   readonly __typename?: 'Query';
   readonly characters: {
     readonly __typename?: 'Characters';
-    readonly results: ReadonlyArray<{ readonly __typename?: 'Character'; readonly id: string }>;
+    readonly info: {
+      readonly __typename?: 'Info';
+      readonly count: number;
+      readonly pages: number;
+      readonly next: number;
+      readonly prev: number;
+    };
+    readonly results: ReadonlyArray<{
+      readonly __typename?: 'Character';
+      readonly id: string;
+      readonly image: string;
+      readonly name: string;
+      readonly species: string;
+    }>;
   };
 };
 
+export const CharacterCardFragmentFragmentDoc = gql`
+  fragment CharacterCardFragment on Character {
+    id
+    image
+    name
+    species
+  }
+`;
 export const GetCharactersDocument = gql`
   query getCharacters {
     characters {
+      info {
+        count
+        pages
+        next
+        prev
+      }
       results {
-        id
+        ...CharacterCardFragment
       }
     }
   }
+  ${CharacterCardFragmentFragmentDoc}
 `;
 
-export type SdkFunctionWrapper = <T>(
-  action: (requestHeaders?: Record<string, string>) => Promise<T>,
-  operationName: string,
-  operationType?: string
-) => Promise<T>;
-
-const defaultWrapper: SdkFunctionWrapper = (action, _operationName, _operationType) => action();
-
-export function getSdk(client: GraphQLClient, withWrapper: SdkFunctionWrapper = defaultWrapper) {
-  return {
-    getCharacters(
-      variables?: GetCharactersQueryVariables,
-      requestHeaders?: GraphQLClientRequestHeaders
-    ): Promise<GetCharactersQuery> {
-      return withWrapper(
-        (wrappedRequestHeaders) =>
-          client.request<GetCharactersQuery>(GetCharactersDocument, variables, {
-            ...requestHeaders,
-            ...wrappedRequestHeaders
-          }),
-        'getCharacters',
-        'query'
-      );
-    }
-  };
+/**
+ * __useGetCharactersQuery__
+ *
+ * To run a query within a React component, call `useGetCharactersQuery` and pass it any options that fit your needs.
+ * When your component renders, `useGetCharactersQuery` returns an object from Apollo Client that contains loading, error, and data properties
+ * you can use to render your UI.
+ *
+ * @param baseOptions options that will be passed into the query, supported options are listed on: https://www.apollographql.com/docs/react/api/react-hooks/#options;
+ *
+ * @example
+ * const { data, loading, error } = useGetCharactersQuery({
+ *   variables: {
+ *   },
+ * });
+ */
+export function useGetCharactersQuery(
+  baseOptions?: Apollo.QueryHookOptions<GetCharactersQuery, GetCharactersQueryVariables>
+) {
+  const options = { ...defaultOptions, ...baseOptions };
+  return Apollo.useQuery<GetCharactersQuery, GetCharactersQueryVariables>(
+    GetCharactersDocument,
+    options
+  );
 }
 
-export type Sdk = ReturnType<typeof getSdk>;
+export function useGetCharactersLazyQuery(
+  baseOptions?: Apollo.LazyQueryHookOptions<GetCharactersQuery, GetCharactersQueryVariables>
+) {
+  const options = { ...defaultOptions, ...baseOptions };
+  return Apollo.useLazyQuery<GetCharactersQuery, GetCharactersQueryVariables>(
+    GetCharactersDocument,
+    options
+  );
+}
+
+export function useGetCharactersSuspenseQuery(
+  baseOptions?: Apollo.SuspenseQueryHookOptions<GetCharactersQuery, GetCharactersQueryVariables>
+) {
+  const options = { ...defaultOptions, ...baseOptions };
+  return Apollo.useSuspenseQuery<GetCharactersQuery, GetCharactersQueryVariables>(
+    GetCharactersDocument,
+    options
+  );
+}
+
+export type GetCharactersQueryHookResult = ReturnType<typeof useGetCharactersQuery>;
+export type GetCharactersLazyQueryHookResult = ReturnType<typeof useGetCharactersLazyQuery>;
+export type GetCharactersSuspenseQueryHookResult = ReturnType<typeof useGetCharactersSuspenseQuery>;
+export type GetCharactersQueryResult = Apollo.QueryResult<
+  GetCharactersQuery,
+  GetCharactersQueryVariables
+>;

@@ -4,12 +4,14 @@ const config: CodegenConfig = {
   config: {
     avoidOptionals: true,
     immutableTypes: true,
-    maybeValue: 'T'
+    maybeValue: 'T',
+    withHooks: true
   },
-  documents: ['./src/utils/graphql/documents/**/*.gql'],
+  documents: ['./src/utils/graphql/documents/**/*.graphql'],
+  emitLegacyCommonJSImports: false,
   generates: {
     './src/utils/graphql/__generated__.ts': {
-      plugins: ['typescript', 'typescript-operations', 'typescript-graphql-request']
+      plugins: ['typescript', 'typescript-operations', 'typescript-react-apollo']
     }
   },
   hooks: {

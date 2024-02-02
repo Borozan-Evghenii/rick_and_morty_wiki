@@ -1,9 +1,9 @@
+import { Logo } from '@UI/icon';
 import { useTheme } from '@hooks';
 import React from 'react';
 import { CiDark, CiLight } from 'react-icons/ci';
 import { Link, useLocation } from 'react-router-dom';
 
-import { Logo } from '../../UI/icon';
 import { routes } from '../../routes/routes.ts';
 
 export const Header: React.FC = () => {
