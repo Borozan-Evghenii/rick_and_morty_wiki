@@ -1,0 +1,6 @@
+fragment LocationCard on Location {
+    id
+    name
+    type
+    dimension
+}

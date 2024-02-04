@@ -1,0 +1,20 @@
+fragment fullCharacterInfo on Character{
+    id
+    name
+    type
+    species
+    status
+    gender
+    image
+    episode {
+        ...EpisodeCard
+    }
+    origin {
+        name
+        id
+    }
+    location {
+        id
+        name
+    }
+}

@@ -1,0 +1,10 @@
+query getAllCharacters {
+    characters {
+        info{
+            ...responseInfo
+        }
+        results {
+            ...CharacterCardFragment
+        }
+    }
+}

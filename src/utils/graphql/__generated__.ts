@@ -207,9 +207,71 @@ export type CharacterCardFragmentFragment = {
   readonly species: string;
 };
 
-export type GetCharactersQueryVariables = Exact<{ [key: string]: never }>;
+export type FullCharacterInfoFragment = {
+  readonly __typename?: 'Character';
+  readonly id: string;
+  readonly name: string;
+  readonly type: string;
+  readonly species: string;
+  readonly status: string;
+  readonly gender: string;
+  readonly image: string;
+  readonly episode: ReadonlyArray<{
+    readonly __typename?: 'Episode';
+    readonly id: string;
+    readonly name: string;
+    readonly episode: string;
+    readonly air_date: string;
+    readonly characters: ReadonlyArray<{
+      readonly __typename?: 'Character';
+      readonly id: string;
+      readonly image: string;
+      readonly name: string;
+      readonly species: string;
+    }>;
+  }>;
+  readonly origin: { readonly __typename?: 'Location'; readonly name: string; readonly id: string };
+  readonly location: {
+    readonly __typename?: 'Location';
+    readonly id: string;
+    readonly name: string;
+  };
+};
 
-export type GetCharactersQuery = {
+export type EpisodeCardFragment = {
+  readonly __typename?: 'Episode';
+  readonly id: string;
+  readonly name: string;
+  readonly episode: string;
+  readonly air_date: string;
+  readonly characters: ReadonlyArray<{
+    readonly __typename?: 'Character';
+    readonly id: string;
+    readonly image: string;
+    readonly name: string;
+    readonly species: string;
+  }>;
+};
+
+export type LocationCardFragment = {
+  readonly __typename?: 'Location';
+  readonly id: string;
+  readonly name: string;
+  readonly type: string;
+  readonly dimension: string;
+};
+
+export type ResponseInfoFragment = {
+  readonly __typename?: 'Info';
+  readonly count: number;
+  readonly pages: number;
+  readonly next: number;
+  readonly prev: number;
+};
+
+export type GetAllCharactersQueryVariables = Exact<{ [key: string]: never }>;
+
+export type GetAllCharactersQuery = {
   readonly __typename?: 'Query';
   readonly characters: {
     readonly __typename?: 'Characters';
@@ -230,6 +292,176 @@ export type GetCharactersQuery = {
   };
 };
 
+export type GetCharacterByIdQueryVariables = Exact<{
+  ids: ReadonlyArray<Scalars['ID']['input']> | Scalars['ID']['input'];
+}>;
+
+export type GetCharacterByIdQuery = {
+  readonly __typename?: 'Query';
+  readonly charactersByIds: ReadonlyArray<{
+    readonly __typename?: 'Character';
+    readonly id: string;
+    readonly name: string;
+    readonly type: string;
+    readonly species: string;
+    readonly status: string;
+    readonly gender: string;
+    readonly image: string;
+    readonly episode: ReadonlyArray<{
+      readonly __typename?: 'Episode';
+      readonly id: string;
+      readonly name: string;
+      readonly episode: string;
+      readonly air_date: string;
+      readonly characters: ReadonlyArray<{
+        readonly __typename?: 'Character';
+        readonly id: string;
+        readonly image: string;
+        readonly name: string;
+        readonly species: string;
+      }>;
+    }>;
+    readonly origin: {
+      readonly __typename?: 'Location';
+      readonly name: string;
+      readonly id: string;
+    };
+    readonly location: {
+      readonly __typename?: 'Location';
+      readonly id: string;
+      readonly name: string;
+    };
+  }>;
+};
+
+export type GetFilterCharactersQueryVariables = Exact<{
+  name: InputMaybe<Scalars['String']['input']>;
+  status: InputMaybe<Scalars['String']['input']>;
+  species: InputMaybe<Scalars['String']['input']>;
+  type: InputMaybe<Scalars['String']['input']>;
+  gender: InputMaybe<Scalars['String']['input']>;
+}>;
+
+export type GetFilterCharactersQuery = {
+  readonly __typename?: 'Query';
+  readonly characters: {
+    readonly __typename?: 'Characters';
+    readonly results: ReadonlyArray<{
+      readonly __typename?: 'Character';
+      readonly id: string;
+      readonly image: string;
+      readonly name: string;
+      readonly species: string;
+    }>;
+  };
+};
+
+export type GetAllEpisodesQueryVariables = Exact<{ [key: string]: never }>;
+
+export type GetAllEpisodesQuery = {
+  readonly __typename?: 'Query';
+  readonly episodes: {
+    readonly __typename?: 'Episodes';
+    readonly results: ReadonlyArray<{
+      readonly __typename?: 'Episode';
+      readonly id: string;
+      readonly name: string;
+      readonly episode: string;
+      readonly air_date: string;
+      readonly characters: ReadonlyArray<{
+        readonly __typename?: 'Character';
+        readonly id: string;
+        readonly image: string;
+        readonly name: string;
+        readonly species: string;
+      }>;
+    }>;
+  };
+};
+
+export type GetEpisodeByIdQueryVariables = Exact<{
+  id: ReadonlyArray<Scalars['ID']['input']> | Scalars['ID']['input'];
+}>;
+
+export type GetEpisodeByIdQuery = {
+  readonly __typename?: 'Query';
+  readonly episodesByIds: ReadonlyArray<{
+    readonly __typename?: 'Episode';
+    readonly id: string;
+    readonly name: string;
+    readonly air_date: string;
+    readonly characters: ReadonlyArray<{
+      readonly __typename?: 'Character';
+      readonly id: string;
+      readonly image: string;
+      readonly name: string;
+      readonly species: string;
+    }>;
+  }>;
+};
+
+export type GetFilterEpisodesQueryVariables = Exact<{
+  name: InputMaybe<Scalars['String']['input']>;
+  episode: InputMaybe<Scalars['String']['input']>;
+}>;
+
+export type GetFilterEpisodesQuery = {
+  readonly __typename?: 'Query';
+  readonly episodes: {
+    readonly __typename?: 'Episodes';
+    readonly results: ReadonlyArray<{
+      readonly __typename?: 'Episode';
+      readonly id: string;
+      readonly name: string;
+      readonly episode: string;
+      readonly air_date: string;
+      readonly characters: ReadonlyArray<{
+        readonly __typename?: 'Character';
+        readonly id: string;
+        readonly image: string;
+        readonly name: string;
+        readonly species: string;
+      }>;
+    }>;
+  };
+};
+
+export type GetAllLocationsQueryVariables = Exact<{ [key: string]: never }>;
+
+export type GetAllLocationsQuery = {
+  readonly __typename?: 'Query';
+  readonly locations: {
+    readonly __typename?: 'Locations';
+    readonly results: ReadonlyArray<{
+      readonly __typename?: 'Location';
+      readonly id: string;
+      readonly name: string;
+      readonly type: string;
+      readonly dimension: string;
+    }>;
+  };
+};
+
+export type GetLocationByIdQueryVariables = Exact<{
+  ids: ReadonlyArray<Scalars['ID']['input']> | Scalars['ID']['input'];
+}>;
+
+export type GetLocationByIdQuery = {
+  readonly __typename?: 'Query';
+  readonly locationsByIds: ReadonlyArray<{
+    readonly __typename?: 'Location';
+    readonly name: string;
+    readonly dimension: string;
+    readonly residents: ReadonlyArray<{
+      readonly __typename?: 'Character';
+      readonly id: string;
+      readonly image: string;
+      readonly name: string;
+      readonly species: string;
+    }>;
+  }>;
+};
+
 export const CharacterCardFragmentFragmentDoc = gql`
   fragment CharacterCardFragment on Character {
     id
@@ -238,15 +470,207 @@ export const CharacterCardFragmentFragmentDoc = gql`
     species
   }
 `;
-export const GetCharactersDocument = gql`
-  query getCharacters {
+export const EpisodeCardFragmentDoc = gql`
+  fragment EpisodeCard on Episode {
+    id
+    name
+    episode
+    air_date
+    characters {
+      ...CharacterCardFragment
+    }
+  }
+  ${CharacterCardFragmentFragmentDoc}
+`;
+export const FullCharacterInfoFragmentDoc = gql`
+  fragment fullCharacterInfo on Character {
+    id
+    name
+    type
+    species
+    status
+    gender
+    image
+    episode {
+      ...EpisodeCard
+    }
+    origin {
+      name
+      id
+    }
+    location {
+      id
+      name
+    }
+  }
+  ${EpisodeCardFragmentDoc}
+`;
+export const LocationCardFragmentDoc = gql`
+  fragment LocationCard on Location {
+    id
+    name
+    type
+    dimension
+  }
+`;
+export const ResponseInfoFragmentDoc = gql`
+  fragment responseInfo on Info {
+    count
+    pages
+    next
+    prev
+  }
+`;
+export const GetAllCharactersDocument = gql`
+  query getAllCharacters {
     characters {
       info {
-        count
-        pages
-        next
-        prev
+        ...responseInfo
       }
+      results {
+        ...CharacterCardFragment
+      }
+    }
+  }
+  ${ResponseInfoFragmentDoc}
+  ${CharacterCardFragmentFragmentDoc}
+`;
+
+/**
+ * __useGetAllCharactersQuery__
+ *
+ * To run a query within a React component, call `useGetAllCharactersQuery` and pass it any options that fit your needs.
+ * When your component renders, `useGetAllCharactersQuery` returns an object from Apollo Client that contains loading, error, and data properties
+ * you can use to render your UI.
+ *
+ * @param baseOptions options that will be passed into the query, supported options are listed on: https://www.apollographql.com/docs/react/api/react-hooks/#options;
+ *
+ * @example
+ * const { data, loading, error } = useGetAllCharactersQuery({
+ *   variables: {
+ *   },
+ * });
+ */
+export function useGetAllCharactersQuery(
+  baseOptions?: Apollo.QueryHookOptions<GetAllCharactersQuery, GetAllCharactersQueryVariables>
+) {
+  const options = { ...defaultOptions, ...baseOptions };
+  return Apollo.useQuery<GetAllCharactersQuery, GetAllCharactersQueryVariables>(
+    GetAllCharactersDocument,
+    options
+  );
+}
+
+export function useGetAllCharactersLazyQuery(
+  baseOptions?: Apollo.LazyQueryHookOptions<GetAllCharactersQuery, GetAllCharactersQueryVariables>
+) {
+  const options = { ...defaultOptions, ...baseOptions };
+  return Apollo.useLazyQuery<GetAllCharactersQuery, GetAllCharactersQueryVariables>(
+    GetAllCharactersDocument,
+    options
+  );
+}
+
+export function useGetAllCharactersSuspenseQuery(
+  baseOptions?: Apollo.SuspenseQueryHookOptions<
+    GetAllCharactersQuery,
+    GetAllCharactersQueryVariables
+  >
+) {
+  const options = { ...defaultOptions, ...baseOptions };
+  return Apollo.useSuspenseQuery<GetAllCharactersQuery, GetAllCharactersQueryVariables>(
+    GetAllCharactersDocument,
+    options
+  );
+}
+
+export type GetAllCharactersQueryHookResult = ReturnType<typeof useGetAllCharactersQuery>;
+export type GetAllCharactersLazyQueryHookResult = ReturnType<typeof useGetAllCharactersLazyQuery>;
+export type GetAllCharactersSuspenseQueryHookResult = ReturnType<
+  typeof useGetAllCharactersSuspenseQuery
+>;
+export type GetAllCharactersQueryResult = Apollo.QueryResult<
+  GetAllCharactersQuery,
+  GetAllCharactersQueryVariables
+>;
+export const GetCharacterByIdDocument = gql`
+  query getCharacterById($ids: [ID!]!) {
+    charactersByIds(ids: $ids) {
+      ...fullCharacterInfo
+    }
+  }
+  ${FullCharacterInfoFragmentDoc}
+`;
+
+/**
+ * __useGetCharacterByIdQuery__
+ *
+ * To run a query within a React component, call `useGetCharacterByIdQuery` and pass it any options that fit your needs.
+ * When your component renders, `useGetCharacterByIdQuery` returns an object from Apollo Client that contains loading, error, and data properties
+ * you can use to render your UI.
+ *
+ * @param baseOptions options that will be passed into the query, supported options are listed on: https://www.apollographql.com/docs/react/api/react-hooks/#options;
+ *
+ * @example
+ * const { data, loading, error } = useGetCharacterByIdQuery({
+ *   variables: {
+ *      ids: // value for 'ids'
+ *   },
+ * });
+ */
+export function useGetCharacterByIdQuery(
+  baseOptions: Apollo.QueryHookOptions<GetCharacterByIdQuery, GetCharacterByIdQueryVariables>
+) {
+  const options = { ...defaultOptions, ...baseOptions };
+  return Apollo.useQuery<GetCharacterByIdQuery, GetCharacterByIdQueryVariables>(
+    GetCharacterByIdDocument,
+    options
+  );
+}
+
+export function useGetCharacterByIdLazyQuery(
+  baseOptions?: Apollo.LazyQueryHookOptions<GetCharacterByIdQuery, GetCharacterByIdQueryVariables>
+) {
+  const options = { ...defaultOptions, ...baseOptions };
+  return Apollo.useLazyQuery<GetCharacterByIdQuery, GetCharacterByIdQueryVariables>(
+    GetCharacterByIdDocument,
+    options
+  );
+}
+
+export function useGetCharacterByIdSuspenseQuery(
+  baseOptions?: Apollo.SuspenseQueryHookOptions<
+    GetCharacterByIdQuery,
+    GetCharacterByIdQueryVariables
+  >
+) {
+  const options = { ...defaultOptions, ...baseOptions };
+  return Apollo.useSuspenseQuery<GetCharacterByIdQuery, GetCharacterByIdQueryVariables>(
+    GetCharacterByIdDocument,
+    options
+  );
+}
+
+export type GetCharacterByIdQueryHookResult = ReturnType<typeof useGetCharacterByIdQuery>;
+export type GetCharacterByIdLazyQueryHookResult = ReturnType<typeof useGetCharacterByIdLazyQuery>;
+export type GetCharacterByIdSuspenseQueryHookResult = ReturnType<
+  typeof useGetCharacterByIdSuspenseQuery
+>;
+export type GetCharacterByIdQueryResult = Apollo.QueryResult<
+  GetCharacterByIdQuery,
+  GetCharacterByIdQueryVariables
+>;
+export const GetFilterCharactersDocument = gql`
+  query getFilterCharacters(
+    $name: String
+    $status: String
+    $species: String
+    $type: String
+    $gender: String
+  ) {
+    characters(
+      filter: { name: $name, status: $status, species: $species, type: $type, gender: $gender }
+    ) {
       results {
         ...CharacterCardFragment
       }
@@ -256,54 +680,406 @@ export const GetCharactersDocument = gql`
 `;
 
 /**
- * __useGetCharactersQuery__
+ * __useGetFilterCharactersQuery__
  *
- * To run a query within a React component, call `useGetCharactersQuery` and pass it any options that fit your needs.
- * When your component renders, `useGetCharactersQuery` returns an object from Apollo Client that contains loading, error, and data properties
+ * To run a query within a React component, call `useGetFilterCharactersQuery` and pass it any options that fit your needs.
+ * When your component renders, `useGetFilterCharactersQuery` returns an object from Apollo Client that contains loading, error, and data properties
  * you can use to render your UI.
  *
  * @param baseOptions options that will be passed into the query, supported options are listed on: https://www.apollographql.com/docs/react/api/react-hooks/#options;
  *
  * @example
- * const { data, loading, error } = useGetCharactersQuery({
+ * const { data, loading, error } = useGetFilterCharactersQuery({
+ *   variables: {
+ *      name: // value for 'name'
+ *      status: // value for 'status'
+ *      species: // value for 'species'
+ *      type: // value for 'type'
+ *      gender: // value for 'gender'
+ *   },
+ * });
+ */
+export function useGetFilterCharactersQuery(
+  baseOptions?: Apollo.QueryHookOptions<GetFilterCharactersQuery, GetFilterCharactersQueryVariables>
+) {
+  const options = { ...defaultOptions, ...baseOptions };
+  return Apollo.useQuery<GetFilterCharactersQuery, GetFilterCharactersQueryVariables>(
+    GetFilterCharactersDocument,
+    options
+  );
+}
+
+export function useGetFilterCharactersLazyQuery(
+  baseOptions?: Apollo.LazyQueryHookOptions<
+    GetFilterCharactersQuery,
+    GetFilterCharactersQueryVariables
+  >
+) {
+  const options = { ...defaultOptions, ...baseOptions };
+  return Apollo.useLazyQuery<GetFilterCharactersQuery, GetFilterCharactersQueryVariables>(
+    GetFilterCharactersDocument,
+    options
+  );
+}
+
+export function useGetFilterCharactersSuspenseQuery(
+  baseOptions?: Apollo.SuspenseQueryHookOptions<
+    GetFilterCharactersQuery,
+    GetFilterCharactersQueryVariables
+  >
+) {
+  const options = { ...defaultOptions, ...baseOptions };
+  return Apollo.useSuspenseQuery<GetFilterCharactersQuery, GetFilterCharactersQueryVariables>(
+    GetFilterCharactersDocument,
+    options
+  );
+}
+
+export type GetFilterCharactersQueryHookResult = ReturnType<typeof useGetFilterCharactersQuery>;
+export type GetFilterCharactersLazyQueryHookResult = ReturnType<
+  typeof useGetFilterCharactersLazyQuery
+>;
+export type GetFilterCharactersSuspenseQueryHookResult = ReturnType<
+  typeof useGetFilterCharactersSuspenseQuery
+>;
+export type GetFilterCharactersQueryResult = Apollo.QueryResult<
+  GetFilterCharactersQuery,
+  GetFilterCharactersQueryVariables
+>;
+export const GetAllEpisodesDocument = gql`
+  query getAllEpisodes {
+    episodes {
+      results {
+        ...EpisodeCard
+      }
+    }
+  }
+  ${EpisodeCardFragmentDoc}
+`;
+
+/**
+ * __useGetAllEpisodesQuery__
+ *
+ * To run a query within a React component, call `useGetAllEpisodesQuery` and pass it any options that fit your needs.
+ * When your component renders, `useGetAllEpisodesQuery` returns an object from Apollo Client that contains loading, error, and data properties
+ * you can use to render your UI.
+ *
+ * @param baseOptions options that will be passed into the query, supported options are listed on: https://www.apollographql.com/docs/react/api/react-hooks/#options;
+ *
+ * @example
+ * const { data, loading, error } = useGetAllEpisodesQuery({
  *   variables: {
  *   },
  * });
  */
-export function useGetCharactersQuery(
-  baseOptions?: Apollo.QueryHookOptions<GetCharactersQuery, GetCharactersQueryVariables>
+export function useGetAllEpisodesQuery(
+  baseOptions?: Apollo.QueryHookOptions<GetAllEpisodesQuery, GetAllEpisodesQueryVariables>
 ) {
   const options = { ...defaultOptions, ...baseOptions };
-  return Apollo.useQuery<GetCharactersQuery, GetCharactersQueryVariables>(
-    GetCharactersDocument,
+  return Apollo.useQuery<GetAllEpisodesQuery, GetAllEpisodesQueryVariables>(
+    GetAllEpisodesDocument,
     options
   );
 }
 
-export function useGetCharactersLazyQuery(
-  baseOptions?: Apollo.LazyQueryHookOptions<GetCharactersQuery, GetCharactersQueryVariables>
+export function useGetAllEpisodesLazyQuery(
+  baseOptions?: Apollo.LazyQueryHookOptions<GetAllEpisodesQuery, GetAllEpisodesQueryVariables>
 ) {
   const options = { ...defaultOptions, ...baseOptions };
-  return Apollo.useLazyQuery<GetCharactersQuery, GetCharactersQueryVariables>(
-    GetCharactersDocument,
+  return Apollo.useLazyQuery<GetAllEpisodesQuery, GetAllEpisodesQueryVariables>(
+    GetAllEpisodesDocument,
     options
   );
 }
 
-export function useGetCharactersSuspenseQuery(
-  baseOptions?: Apollo.SuspenseQueryHookOptions<GetCharactersQuery, GetCharactersQueryVariables>
+export function useGetAllEpisodesSuspenseQuery(
+  baseOptions?: Apollo.SuspenseQueryHookOptions<GetAllEpisodesQuery, GetAllEpisodesQueryVariables>
 ) {
   const options = { ...defaultOptions, ...baseOptions };
-  return Apollo.useSuspenseQuery<GetCharactersQuery, GetCharactersQueryVariables>(
-    GetCharactersDocument,
+  return Apollo.useSuspenseQuery<GetAllEpisodesQuery, GetAllEpisodesQueryVariables>(
+    GetAllEpisodesDocument,
     options
   );
 }
 
-export type GetCharactersQueryHookResult = ReturnType<typeof useGetCharactersQuery>;
-export type GetCharactersLazyQueryHookResult = ReturnType<typeof useGetCharactersLazyQuery>;
-export type GetCharactersSuspenseQueryHookResult = ReturnType<typeof useGetCharactersSuspenseQuery>;
-export type GetCharactersQueryResult = Apollo.QueryResult<
-  GetCharactersQuery,
-  GetCharactersQueryVariables
+export type GetAllEpisodesQueryHookResult = ReturnType<typeof useGetAllEpisodesQuery>;
+export type GetAllEpisodesLazyQueryHookResult = ReturnType<typeof useGetAllEpisodesLazyQuery>;
+export type GetAllEpisodesSuspenseQueryHookResult = ReturnType<
+  typeof useGetAllEpisodesSuspenseQuery
+>;
+export type GetAllEpisodesQueryResult = Apollo.QueryResult<
+  GetAllEpisodesQuery,
+  GetAllEpisodesQueryVariables
+>;
+export const GetEpisodeByIdDocument = gql`
+  query getEpisodeById($id: [ID!]!) {
+    episodesByIds(ids: $id) {
+      id
+      name
+      air_date
+      characters {
+        ...CharacterCardFragment
+      }
+    }
+  }
+  ${CharacterCardFragmentFragmentDoc}
+`;
+
+/**
+ * __useGetEpisodeByIdQuery__
+ *
+ * To run a query within a React component, call `useGetEpisodeByIdQuery` and pass it any options that fit your needs.
+ * When your component renders, `useGetEpisodeByIdQuery` returns an object from Apollo Client that contains loading, error, and data properties
+ * you can use to render your UI.
+ *
+ * @param baseOptions options that will be passed into the query, supported options are listed on: https://www.apollographql.com/docs/react/api/react-hooks/#options;
+ *
+ * @example
+ * const { data, loading, error } = useGetEpisodeByIdQuery({
+ *   variables: {
+ *      id: // value for 'id'
+ *   },
+ * });
+ */
+export function useGetEpisodeByIdQuery(
+  baseOptions: Apollo.QueryHookOptions<GetEpisodeByIdQuery, GetEpisodeByIdQueryVariables>
+) {
+  const options = { ...defaultOptions, ...baseOptions };
+  return Apollo.useQuery<GetEpisodeByIdQuery, GetEpisodeByIdQueryVariables>(
+    GetEpisodeByIdDocument,
+    options
+  );
+}
+
+export function useGetEpisodeByIdLazyQuery(
+  baseOptions?: Apollo.LazyQueryHookOptions<GetEpisodeByIdQuery, GetEpisodeByIdQueryVariables>
+) {
+  const options = { ...defaultOptions, ...baseOptions };
+  return Apollo.useLazyQuery<GetEpisodeByIdQuery, GetEpisodeByIdQueryVariables>(
+    GetEpisodeByIdDocument,
+    options
+  );
+}
+
+export function useGetEpisodeByIdSuspenseQuery(
+  baseOptions?: Apollo.SuspenseQueryHookOptions<GetEpisodeByIdQuery, GetEpisodeByIdQueryVariables>
+) {
+  const options = { ...defaultOptions, ...baseOptions };
+  return Apollo.useSuspenseQuery<GetEpisodeByIdQuery, GetEpisodeByIdQueryVariables>(
+    GetEpisodeByIdDocument,
+    options
+  );
+}
+
+export type GetEpisodeByIdQueryHookResult = ReturnType<typeof useGetEpisodeByIdQuery>;
+export type GetEpisodeByIdLazyQueryHookResult = ReturnType<typeof useGetEpisodeByIdLazyQuery>;
+export type GetEpisodeByIdSuspenseQueryHookResult = ReturnType<
+  typeof useGetEpisodeByIdSuspenseQuery
+>;
+export type GetEpisodeByIdQueryResult = Apollo.QueryResult<
+  GetEpisodeByIdQuery,
+  GetEpisodeByIdQueryVariables
+>;
+export const GetFilterEpisodesDocument = gql`
+  query getFilterEpisodes($name: String, $episode: String) {
+    episodes(filter: { name: $name, episode: $episode }) {
+      results {
+        ...EpisodeCard
+      }
+    }
+  }
+  ${EpisodeCardFragmentDoc}
+`;
+
+/**
+ * __useGetFilterEpisodesQuery__
+ *
+ * To run a query within a React component, call `useGetFilterEpisodesQuery` and pass it any options that fit your needs.
+ * When your component renders, `useGetFilterEpisodesQuery` returns an object from Apollo Client that contains loading, error, and data properties
+ * you can use to render your UI.
+ *
+ * @param baseOptions options that will be passed into the query, supported options are listed on: https://www.apollographql.com/docs/react/api/react-hooks/#options;
+ *
+ * @example
+ * const { data, loading, error } = useGetFilterEpisodesQuery({
+ *   variables: {
+ *      name: // value for 'name'
+ *      episode: // value for 'episode'
+ *   },
+ * });
+ */
+export function useGetFilterEpisodesQuery(
+  baseOptions?: Apollo.QueryHookOptions<GetFilterEpisodesQuery, GetFilterEpisodesQueryVariables>
+) {
+  const options = { ...defaultOptions, ...baseOptions };
+  return Apollo.useQuery<GetFilterEpisodesQuery, GetFilterEpisodesQueryVariables>(
+    GetFilterEpisodesDocument,
+    options
+  );
+}
+
+export function useGetFilterEpisodesLazyQuery(
+  baseOptions?: Apollo.LazyQueryHookOptions<GetFilterEpisodesQuery, GetFilterEpisodesQueryVariables>
+) {
+  const options = { ...defaultOptions, ...baseOptions };
+  return Apollo.useLazyQuery<GetFilterEpisodesQuery, GetFilterEpisodesQueryVariables>(
+    GetFilterEpisodesDocument,
+    options
+  );
+}
+
+export function useGetFilterEpisodesSuspenseQuery(
+  baseOptions?: Apollo.SuspenseQueryHookOptions<
+    GetFilterEpisodesQuery,
+    GetFilterEpisodesQueryVariables
+  >
+) {
+  const options = { ...defaultOptions, ...baseOptions };
+  return Apollo.useSuspenseQuery<GetFilterEpisodesQuery, GetFilterEpisodesQueryVariables>(
+    GetFilterEpisodesDocument,
+    options
+  );
+}
+
+export type GetFilterEpisodesQueryHookResult = ReturnType<typeof useGetFilterEpisodesQuery>;
+export type GetFilterEpisodesLazyQueryHookResult = ReturnType<typeof useGetFilterEpisodesLazyQuery>;
+export type GetFilterEpisodesSuspenseQueryHookResult = ReturnType<
+  typeof useGetFilterEpisodesSuspenseQuery
+>;
+export type GetFilterEpisodesQueryResult = Apollo.QueryResult<
+  GetFilterEpisodesQuery,
+  GetFilterEpisodesQueryVariables
+>;
+export const GetAllLocationsDocument = gql`
+  query getAllLocations {
+    locations {
+      results {
+        ...LocationCard
+      }
+    }
+  }
+  ${LocationCardFragmentDoc}
+`;
+
+/**
+ * __useGetAllLocationsQuery__
+ *
+ * To run a query within a React component, call `useGetAllLocationsQuery` and pass it any options that fit your needs.
+ * When your component renders, `useGetAllLocationsQuery` returns an object from Apollo Client that contains loading, error, and data properties
+ * you can use to render your UI.
+ *
+ * @param baseOptions options that will be passed into the query, supported options are listed on: https://www.apollographql.com/docs/react/api/react-hooks/#options;
+ *
+ * @example
+ * const { data, loading, error } = useGetAllLocationsQuery({
+ *   variables: {
+ *   },
+ * });
+ */
+export function useGetAllLocationsQuery(
+  baseOptions?: Apollo.QueryHookOptions<GetAllLocationsQuery, GetAllLocationsQueryVariables>
+) {
+  const options = { ...defaultOptions, ...baseOptions };
+  return Apollo.useQuery<GetAllLocationsQuery, GetAllLocationsQueryVariables>(
+    GetAllLocationsDocument,
+    options
+  );
+}
+
+export function useGetAllLocationsLazyQuery(
+  baseOptions?: Apollo.LazyQueryHookOptions<GetAllLocationsQuery, GetAllLocationsQueryVariables>
+) {
+  const options = { ...defaultOptions, ...baseOptions };
+  return Apollo.useLazyQuery<GetAllLocationsQuery, GetAllLocationsQueryVariables>(
+    GetAllLocationsDocument,
+    options
+  );
+}
+
+export function useGetAllLocationsSuspenseQuery(
+  baseOptions?: Apollo.SuspenseQueryHookOptions<GetAllLocationsQuery, GetAllLocationsQueryVariables>
+) {
+  const options = { ...defaultOptions, ...baseOptions };
+  return Apollo.useSuspenseQuery<GetAllLocationsQuery, GetAllLocationsQueryVariables>(
+    GetAllLocationsDocument,
+    options
+  );
+}
+
+export type GetAllLocationsQueryHookResult = ReturnType<typeof useGetAllLocationsQuery>;
+export type GetAllLocationsLazyQueryHookResult = ReturnType<typeof useGetAllLocationsLazyQuery>;
+export type GetAllLocationsSuspenseQueryHookResult = ReturnType<
+  typeof useGetAllLocationsSuspenseQuery
+>;
+export type GetAllLocationsQueryResult = Apollo.QueryResult<
+  GetAllLocationsQuery,
+  GetAllLocationsQueryVariables
+>;
+export const GetLocationByIdDocument = gql`
+  query getLocationById($ids: [ID!]!) {
+    locationsByIds(ids: $ids) {
+      name
+      dimension
+      residents {
+        ...CharacterCardFragment
+      }
+    }
+  }
+  ${CharacterCardFragmentFragmentDoc}
+`;
+
+/**
+ * __useGetLocationByIdQuery__
+ *
+ * To run a query within a React component, call `useGetLocationByIdQuery` and pass it any options that fit your needs.
+ * When your component renders, `useGetLocationByIdQuery` returns an object from Apollo Client that contains loading, error, and data properties
+ * you can use to render your UI.
+ *
+ * @param baseOptions options that will be passed into the query, supported options are listed on: https://www.apollographql.com/docs/react/api/react-hooks/#options;
+ *
+ * @example
+ * const { data, loading, error } = useGetLocationByIdQuery({
+ *   variables: {
+ *      ids: // value for 'ids'
+ *   },
+ * });
+ */
+export function useGetLocationByIdQuery(
+  baseOptions: Apollo.QueryHookOptions<GetLocationByIdQuery, GetLocationByIdQueryVariables>
+) {
+  const options = { ...defaultOptions, ...baseOptions };
+  return Apollo.useQuery<GetLocationByIdQuery, GetLocationByIdQueryVariables>(
+    GetLocationByIdDocument,
+    options
+  );
+}
+
+export function useGetLocationByIdLazyQuery(
+  baseOptions?: Apollo.LazyQueryHookOptions<GetLocationByIdQuery, GetLocationByIdQueryVariables>
+) {
+  const options = { ...defaultOptions, ...baseOptions };
+  return Apollo.useLazyQuery<GetLocationByIdQuery, GetLocationByIdQueryVariables>(
+    GetLocationByIdDocument,
+    options
+  );
+}
+
+export function useGetLocationByIdSuspenseQuery(
+  baseOptions?: Apollo.SuspenseQueryHookOptions<GetLocationByIdQuery, GetLocationByIdQueryVariables>
+) {
+  const options = { ...defaultOptions, ...baseOptions };
+  return Apollo.useSuspenseQuery<GetLocationByIdQuery, GetLocationByIdQueryVariables>(
+    GetLocationByIdDocument,
+    options
+  );
+}
+
+export type GetLocationByIdQueryHookResult = ReturnType<typeof useGetLocationByIdQuery>;
+export type GetLocationByIdLazyQueryHookResult = ReturnType<typeof useGetLocationByIdLazyQuery>;
+export type GetLocationByIdSuspenseQueryHookResult = ReturnType<
+  typeof useGetLocationByIdSuspenseQuery
+>;
+export type GetLocationByIdQueryResult = Apollo.QueryResult<
+  GetLocationByIdQuery,
+  GetLocationByIdQueryVariables
 >;

@@ -1,0 +1,7 @@
+query getFilterEpisodes($name:String, $episode:String){
+    episodes(filter: {name: $name, episode: $episode}){
+        results {
+            ...EpisodeCard
+        }
+    }
+}

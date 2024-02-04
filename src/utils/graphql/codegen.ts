@@ -17,6 +17,7 @@ const config: CodegenConfig = {
   hooks: {
     afterOneFileWrite: ['prettier --write']
   },
+  ignoreNoDocuments: true,
   overwrite: true,
   schema: 'https://rickandmortyapi.com/graphql'
 };

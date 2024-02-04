@@ -1,0 +1,9 @@
+fragment EpisodeCard on Episode{
+    id
+    name
+    episode
+    air_date
+    characters {
+        ...CharacterCardFragment
+    }
+}
