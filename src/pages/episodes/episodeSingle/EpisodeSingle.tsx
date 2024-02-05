@@ -1,6 +1,6 @@
 import { CharacterCard, HeroSection } from '@components';
 import { useGetEpisodeByIdQuery } from '@gql';
-import { GridLayout, PageLayout, SectionLayout } from '@layouts';
+import { GridLayout, SectionLayout } from '@layouts';
 import React from 'react';
 import { useParams } from 'react-router';
 
@@ -15,8 +15,8 @@ export const EpisodeSingle: React.FC = () => {
   });
 
   return (
-    <PageLayout>
-      <HeroSection />
+    <>
+      <HeroSection title={episodeResponse.data?.episodesByIds[0].name} />
       <SectionLayout title="Characters in this episode">
         <GridLayout>
           {episodeResponse?.data?.episodesByIds[0]?.characters.map((character) => (
@@ -24,6 +24,6 @@ export const EpisodeSingle: React.FC = () => {
           ))}
         </GridLayout>
       </SectionLayout>
-    </PageLayout>
+    </>
   );
 };

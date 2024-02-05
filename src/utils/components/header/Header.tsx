@@ -2,12 +2,11 @@ import { Logo } from '@UI/icon';
 import { useTheme } from '@hooks';
 import React from 'react';
 import { CiDark, CiLight } from 'react-icons/ci';
-import { Link, useLocation } from 'react-router-dom';
+import { Link } from 'react-router-dom';
 
-import { routes } from '../../routes/routes.ts';
+import { ROUTER } from '../../routes/routerPathConstants.ts';
 
 export const Header: React.FC = () => {
-  const location = useLocation();
   const { isDark, toggleTheme } = useTheme();
 
   return (
@@ -18,20 +17,9 @@ export const Header: React.FC = () => {
             <Logo className="fill-light-primary dark:fill-dark-primary" height="40" width="40" />
           </Link>
           <nav className="hidden items-center sm:flex sm:gap-10 ">
-            {routes.map((route) => {
-              if (route.path !== '/' && route.toNavigation) {
-                return (
-                  <Link
-                    key={route.path}
-                    className={`link ${route.path === location.pathname && 'linkActive'}`}
-                    to={route.path}
-                  >
-                    {route.name}
-                  </Link>
-                );
-              }
-              return null;
-            })}
+            <Link to={ROUTER.CHARACTERS}>Characters</Link>
+            <Link to={ROUTER.EPISODES}>Episodes</Link>
+            <Link to={ROUTER.LOCATIONS}>Locations</Link>
           </nav>
           <button
             className="flex h-[40px] w-[40px] items-center justify-center rounded-full bg-light-accent dark:bg-dark-accent "
