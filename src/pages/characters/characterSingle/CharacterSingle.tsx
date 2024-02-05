@@ -2,7 +2,7 @@ import { LinkButton } from '@UI';
 import { EpisodeCard, HeroSection } from '@components';
 import type { EpisodeCardFragment } from '@gql';
 import { useGetCharacterByIdQuery } from '@gql';
-import { GridLayout, PageLayout, SectionLayout } from '@layouts';
+import { GridLayout, SectionLayout } from '@layouts';
 import React from 'react';
 import { FiArrowUpRight } from 'react-icons/fi';
 import { useParams } from 'react-router';
@@ -20,8 +20,8 @@ export const CharacterSingle: React.FC = () => {
   const characterInfo = characterResponse.data?.charactersByIds[0];
 
   return (
-    <PageLayout>
-      <HeroSection characterImage={characterInfo?.image} />
+    <>
+      <HeroSection bgImage={characterInfo?.image} title={characterInfo?.name} />
       <SectionLayout>
         <div className="relative z-10 -mt-32 flex flex-col flex-wrap items-start gap-10 md:flex-row md:items-end">
           <div>
@@ -65,6 +65,6 @@ export const CharacterSingle: React.FC = () => {
           ))}
         </GridLayout>
       </SectionLayout>
-    </PageLayout>
+    </>
   );
 };

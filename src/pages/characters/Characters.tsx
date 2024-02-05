@@ -1,7 +1,7 @@
 import { Autocomplete, CharacterCard, HeroSection, Select } from '@components';
 import type { CharacterCardFragmentFragment } from '@gql';
 import { GetFilterCharactersDocument, useGetFilterCharactersQuery } from '@gql';
-import { FilterLayout, GridLayout, PageLayout, SectionLayout } from '@layouts';
+import { FilterLayout, GridLayout, SectionLayout } from '@layouts';
 import { useState } from 'react';
 
 const mockData = {
@@ -51,8 +51,8 @@ export const Characters = () => {
   });
 
   return (
-    <PageLayout>
-      <HeroSection />
+    <>
+      <HeroSection title="Characters" />
       <FilterLayout>
         <Autocomplete
           className="md:col-span-full lg:col-span-1"
@@ -93,6 +93,6 @@ export const Characters = () => {
           )}
         </GridLayout>
       </SectionLayout>
-    </PageLayout>
+    </>
   );
 };

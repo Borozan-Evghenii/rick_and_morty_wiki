@@ -1,6 +1,6 @@
 import { Autocomplete, HeroSection, LocationCard, Select } from '@components';
 import { GetFilterLocationsDocument, useGetFilterLocationsQuery } from '@gql';
-import { FilterLayout, GridLayout, PageLayout, SectionLayout } from '@layouts';
+import { FilterLayout, GridLayout, SectionLayout } from '@layouts';
 import { useState } from 'react';
 
 const mockData = {
@@ -50,8 +50,8 @@ export const Locations = () => {
   });
 
   return (
-    <PageLayout>
-      <HeroSection />
+    <>
+      <HeroSection title="Locations" />
       <FilterLayout>
         <Autocomplete
           className="md:col-span-2 lg:col-span-3"
@@ -80,6 +80,6 @@ export const Locations = () => {
           ))}
         </GridLayout>
       </SectionLayout>
-    </PageLayout>
+    </>
   );
 };

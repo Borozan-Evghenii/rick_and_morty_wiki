@@ -1,6 +1,6 @@
 import { Autocomplete, EpisodeCard, HeroSection, Select } from '@components';
 import { GetFilterEpisodesDocument, useGetFilterEpisodesQuery } from '@gql';
-import { GridLayout, PageLayout, SectionLayout } from '@layouts';
+import { GridLayout, SectionLayout } from '@layouts';
 import { useState } from 'react';
 
 interface Filter {
@@ -18,8 +18,8 @@ export const Episodes = () => {
   const episodesResponse = useGetFilterEpisodesQuery({ variables: filter });
 
   return (
-    <PageLayout>
-      <HeroSection />
+    <>
+      <HeroSection title="Episodes" />
       <SectionLayout>
         <div className="flex justify-end">
           <Autocomplete
@@ -42,6 +42,6 @@ export const Episodes = () => {
           ))}
         </GridLayout>
       </SectionLayout>
-    </PageLayout>
+    </>
   );
 };
