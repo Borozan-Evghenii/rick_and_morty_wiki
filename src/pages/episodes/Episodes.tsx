@@ -1,5 +1,5 @@
 import { Autocomplete, EpisodeCard, HeroSection, Select } from '@components';
-import { useGetFilterEpisodesQuery } from '@gql';
+import { GetFilterEpisodesDocument, useGetFilterEpisodesQuery } from '@gql';
 import { GridLayout, PageLayout, SectionLayout } from '@layouts';
 import { useState } from 'react';
 
@@ -23,11 +23,8 @@ export const Episodes = () => {
       <SectionLayout>
         <div className="flex justify-end">
           <Autocomplete
-            data={episodesResponse.data?.episodes.results.map((episode) => ({
-              id: episode.id,
-              value: episode.name
-            }))}
-            onChange={(_, value) => setFilter((prev) => ({ ...prev, name: value }))}
+            query={GetFilterEpisodesDocument}
+            onSelect={(_, value) => setFilter((prev) => ({ ...prev, name: value }))}
           />
           <Select
             className="min-w-[230px]"

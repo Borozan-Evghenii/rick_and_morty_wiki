@@ -1,30 +1,32 @@
 import { Autocomplete, HeroSection, LocationCard, Select } from '@components';
-import { useGetFilterLocationsQuery } from '@gql';
+import { GetFilterLocationsDocument, useGetFilterLocationsQuery } from '@gql';
 import { FilterLayout, GridLayout, PageLayout, SectionLayout } from '@layouts';
 import { useState } from 'react';
 
 const mockData = {
   dimension: [
-    { id: '1', value: 'Dimension C-137' },
-    { id: '2', value: 'Post-Apocalyptic Dimension' },
-    { id: '3', value: 'Replacement Dimension' },
-    { id: '4', value: 'Unknown' }
+    { id: '0', name: 'Default' },
+    { id: '1', name: 'Dimension C-137' },
+    { id: '2', name: 'Post-Apocalyptic Dimension' },
+    { id: '3', name: 'Replacement Dimension' },
+    { id: '4', name: 'Unknown' }
   ],
   search: [
-    { id: '1', value: 'Abadogo' },
-    { id: '2', value: 'Aatomy Park' },
-    { id: '3', value: 'Earth (C-137)' },
-    { id: '4', value: 'Citadel of Ricks' },
-    { id: '5', value: "Worldender's lair" },
-    { id: '6', value: 'Interdimensional Cable' },
-    { id: '7', value: 'Immortality Field Resort' }
+    { id: '1', name: 'Abadogo' },
+    { id: '2', name: 'Aatomy Park' },
+    { id: '3', name: 'Earth (C-137)' },
+    { id: '4', name: 'Citadel of Ricks' },
+    { id: '5', name: "Worldender's lair" },
+    { id: '6', name: 'Interdimensional Cable' },
+    { id: '7', name: 'Immortality Field Resort' }
   ],
   type: [
-    { id: '1', value: 'Planet' },
-    { id: '2', value: 'Cluster' },
-    { id: '3', value: 'Microverse' },
-    { id: '4', value: 'Resort' },
-    { id: '5', value: 'Space station' }
+    { id: '0', name: 'Default' },
+    { id: '1', name: 'Planet' },
+    { id: '2', name: 'Cluster' },
+    { id: '3', name: 'Microverse' },
+    { id: '4', name: 'Resort' },
+    { id: '5', name: 'Space station' }
   ]
 };
 
@@ -53,12 +55,23 @@ export const Locations = () => {
       <FilterLayout>
         <Autocomplete
           className="md:col-span-2 lg:col-span-3"
-          data={mockData.search}
-          onChange={(_, value) => setFilter((prev) => ({ ...prev, name: value }))}
-          onSelect={(_, value) => setFilter((prev) => ({ ...prev, name: value }))}
+          query={GetFilterLocationsDocument}
+          onSelect={(_, value) =>
+            setFilter((prev) => ({ ...prev, name: value === 'Default' ? '' : value }))
+          }
         />
-        <Select data={mockData.type} prefix="Type: " onSelect={() => {}} />
-        <Select data={mockData.dimension} prefix="Dimension: " onSelect={() => {}} />
+        <Select
+          data={mockData.type}
+          prefix="Type: "
+          onSelect={(_, value) =>
+            setFilter((prevState) => ({ ...prevState, type: value === 'Default' ? '' : value }))
+          }
+        />
+        <Select
+          data={mockData.dimension}
+          prefix="Dimension: "
+          onSelect={(_, value) => setFilter((prevState) => ({ ...prevState, dimension: value }))}
+        />
       </FilterLayout>
       <SectionLayout>
         <GridLayout columns="4">

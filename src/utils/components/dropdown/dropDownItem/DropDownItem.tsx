@@ -1,7 +1,7 @@
 import React from 'react';
 
 interface DropDownItemProps extends GetProps<'div'> {
-  children: string;
+  children: React.ReactNode;
 }
 
 export const DropDownItem: React.FC<DropDownItemProps> = ({ children, ...props }) => (
