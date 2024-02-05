@@ -1,5 +1,3 @@
-import type { FixMe } from '../../../../@types';
-
 export const useLocaleStorage = () => {
   const getLocaleStorage = (key: string): FixMe => {
     const items = window.localStorage.getItem(key);

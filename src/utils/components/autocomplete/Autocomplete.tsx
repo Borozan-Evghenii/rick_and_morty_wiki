@@ -7,23 +7,26 @@ import { DropDown } from '../dropdown/DropDown.tsx';
 
 interface AutocompleteProps<T> {
   icon?: React.ReactNode;
-  data: T[];
-  onChange: (event: React.MouseEvent<HTMLDivElement>, value: string) => void;
+  data: T;
+  onChange: (event: React.ChangeEvent, value: string) => void;
+  onSelect: (event: React.MouseEvent<HTMLDivElement>, value: string) => void;
   className?: string;
 }
 
-export const Autocomplete = <T extends { id: string; value: string }>({
+export const Autocomplete = <T extends { id: string; value: string }[] | undefined>({
   data,
   icon,
   onChange,
-  className
+  className,
+  onSelect
 }: AutocompleteProps<T>) => {
   const [showDropDown, setShowDropDown] = React.useState<boolean>(false);
   const inputValue = useInput('');
   const { componentRef } = useOnClickOutside(() => setShowDropDown(false));
 
   const filteredData = React.useMemo(
-    () => data.filter((item) => item.value.toLowerCase().includes(inputValue.value.toLowerCase())),
+    () =>
+      data?.filter((item) => item?.value.toLowerCase().includes(inputValue.value.toLowerCase())),
     [data, inputValue]
   );
 
@@ -33,6 +36,7 @@ export const Autocomplete = <T extends { id: string; value: string }>({
         iconStart={!icon ? <CiSearch className="h-full w-5" /> : icon}
         value={inputValue.value}
         onChange={(event: React.ChangeEvent<HTMLInputElement>) => {
+          onChange(event, event.target.value);
           inputValue.onChangeValue(event.target.value);
         }}
         onFocus={() => {
@@ -43,7 +47,7 @@ export const Autocomplete = <T extends { id: string; value: string }>({
         data={filteredData}
         show={showDropDown}
         onSelect={(event, value) => {
-          onChange(event, value);
+          onSelect(event, value);
           inputValue.onChangeValue(value);
           setShowDropDown((prev) => !prev);
         }}

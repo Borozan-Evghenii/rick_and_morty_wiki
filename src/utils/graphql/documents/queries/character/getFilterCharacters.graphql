@@ -1,0 +1,7 @@
+query getFilterCharacters ($name:String, $status:String, $species:String, $type:String, $gender:String){
+    characters(filter: {name:$name, status: $status, species: $species, type: $type, gender: $gender}){
+        results {
+            ...CharacterCardFragment
+        }
+    }
+}

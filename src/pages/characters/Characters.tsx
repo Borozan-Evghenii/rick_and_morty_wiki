@@ -1,6 +1,8 @@
 import { Autocomplete, CharacterCard, HeroSection, Select } from '@components';
+import type { CharacterCardFragmentFragment } from '@gql';
+import { useGetFilterCharactersQuery } from '@gql';
 import { FilterLayout, GridLayout, PageLayout, SectionLayout } from '@layouts';
-import React from 'react';
+import { useState } from 'react';
 
 const mockData = {
   gender: [
@@ -32,57 +34,64 @@ const mockData = {
     { id: '5', value: 'Human with ants in his eyes' }
   ]
 };
-export const Characters: React.FC = () => (
-  <PageLayout>
-    <HeroSection />
-    <FilterLayout>
-      <Autocomplete
-        className="md:col-span-full lg:col-span-1"
-        data={mockData.names}
-        /* eslint-disable-next-line no-console */
-        onChange={(_, value) => console.log(value)}
-      />
-      <Select
-        data={mockData.status}
-        prefix="Status: "
-        /* eslint-disable-next-line no-console */
-        onSelect={(_, value) => console.log(value)}
-      />
-      <Select
-        data={mockData.species}
-        prefix="Species: "
-        /* eslint-disable-next-line no-console */
-        onSelect={(_, value) => console.log(value)}
-      />
 
-      <Select
-        data={mockData.type}
-        prefix="Type: "
-        /* eslint-disable-next-line no-console */
-        onSelect={(_, value) => console.log(value)}
-      />
-      <Select
-        data={mockData.gender}
-        prefix="Gender: "
-        /* eslint-disable-next-line no-console */
-        onSelect={(_, value) => console.log(value)}
-      />
-    </FilterLayout>
-    <SectionLayout>
-      <GridLayout>
-        <CharacterCard />
-        <CharacterCard />
-        <CharacterCard />
-        <CharacterCard />
-        <CharacterCard />
-        <CharacterCard />
-        <CharacterCard />
-        <CharacterCard />
-        <CharacterCard />
-        <CharacterCard />
-        <CharacterCard />
-        <CharacterCard />
-      </GridLayout>
-    </SectionLayout>
-  </PageLayout>
-);
+const filterObj = {
+  gender: '',
+  name: '',
+  species: '',
+  status: '',
+  type: ''
+};
+export const Characters = () => {
+  const [filter, setFilter] = useState(filterObj);
+
+  const charactersResponse = useGetFilterCharactersQuery({
+    variables: filter
+  });
+
+  return (
+    <PageLayout>
+      <HeroSection />
+      <FilterLayout>
+        <Autocomplete
+          className="md:col-span-full lg:col-span-1"
+          data={mockData.names}
+          onChange={(_, value) => setFilter((prev) => ({ ...prev, name: value }))}
+        />
+        <Select
+          data={mockData.status}
+          prefix="Status: "
+          onSelect={(_, value) => setFilter((prev) => ({ ...prev, status: value }))}
+        />
+        <Select
+          data={mockData.species}
+          prefix="Species: "
+          /* eslint-disable-next-line no-console */
+          onSelect={(_, value) => setFilter((prev) => ({ ...prev, species: value }))}
+        />
+
+        <Select
+          data={mockData.type}
+          prefix="Type: "
+          /* eslint-disable-next-line no-console */
+          onSelect={(_, value) => setFilter((prev) => ({ ...prev, type: value }))}
+        />
+        <Select
+          data={mockData.gender}
+          prefix="Gender: "
+          /* eslint-disable-next-line no-console */
+          onSelect={(_, value) => setFilter((prev) => ({ ...prev, gender: value }))}
+        />
+      </FilterLayout>
+      <SectionLayout>
+        <GridLayout>
+          {charactersResponse?.data?.characters?.results?.map(
+            (character: CharacterCardFragmentFragment) => (
+              <CharacterCard key={character.id} info={character} />
+            )
+          )}
+        </GridLayout>
+      </SectionLayout>
+    </PageLayout>
+  );
+};

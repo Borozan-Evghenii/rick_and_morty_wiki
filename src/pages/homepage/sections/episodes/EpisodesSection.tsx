@@ -1,9 +1,8 @@
+import { EpisodeCard } from '@components';
 import { GridLayout, HomeSectionLayout } from '@layouts';
 import React from 'react';
 
-import { EpisodeCard } from '../../../../utils/components/episodeCard/EpisodeCard.tsx';
-
-const EpisodesSection: React.FC = () => (
+export const EpisodesSection: React.FC = () => (
   <HomeSectionLayout link="/episodes" title="Episodes">
     <GridLayout columns="3">
       <EpisodeCard />
@@ -15,5 +14,3 @@ const EpisodesSection: React.FC = () => (
     </GridLayout>
   </HomeSectionLayout>
 );
-
-export default EpisodesSection;

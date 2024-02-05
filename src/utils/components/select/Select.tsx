@@ -28,6 +28,7 @@ export const Select = <T extends { id: string; value: string }>({
     setShowDropdown(false);
     onSelect(event, value);
   };
+
   return (
     <div ref={componentRef} className={`relative ${className}`}>
       <button

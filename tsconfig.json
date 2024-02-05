@@ -3,11 +3,12 @@
     "target": "ES2020",
     "useDefineForClassFields": true,
     "lib": ["ES2020", "DOM", "DOM.Iterable"],
-    "module": "ESNext",
     "skipLibCheck": true,
+    "moduleResolution": "node",
+    //if is set node16 doesn't work import alias
+    "module": "node16",
 
     /* Bundler mode */
-    "moduleResolution": "bundler",
     "allowImportingTsExtensions": true,
     "resolveJsonModule": true,
     "isolatedModules": true,
@@ -19,10 +20,19 @@
     "noUnusedLocals": true,
     "noUnusedParameters": true,
     "noFallthroughCasesInSwitch": true,
-    "baseUrl": ".",
+    "baseUrl": "./",
     "paths": {
+      "@gql": [
+        "./src/utils/graphql/client"
+      ],
+      "@helpers": [
+        "./src/utils/helpers"
+      ],
       "@components": [
         "./src/utils/components"
+      ],
+      "@sections": [
+        "./src/pages/homepage/sections"
       ],
       "@layouts": [
         "./src/utils/components/layouts"
@@ -32,6 +42,9 @@
       ],
       "@UI": [
         "./src/utils/UI"
+      ],
+      "@UI/icon": [
+        "./src/utils/UI/icon"
       ],
       "@hooks": [
         "./src/utils/hooks"

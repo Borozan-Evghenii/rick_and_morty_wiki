@@ -1,0 +1,6 @@
+fragment responseInfo on Info{
+    count
+    pages
+    next
+    prev
+}

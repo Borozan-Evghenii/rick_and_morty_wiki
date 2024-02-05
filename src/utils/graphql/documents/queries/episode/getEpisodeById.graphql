@@ -1,0 +1,10 @@
+query getEpisodeById($id:[ID!]!){
+    episodesByIds(ids:$id){
+        id
+        name
+        air_date
+        characters{
+            ...CharacterCardFragment
+        }
+    }
+}

@@ -1,0 +1,5 @@
+query getCharacterById($ids:[ID!]!) {
+    charactersByIds(ids:$ids ){
+        ...fullCharacterInfo
+    }
+}

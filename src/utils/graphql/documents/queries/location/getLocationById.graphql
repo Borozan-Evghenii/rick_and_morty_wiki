@@ -1,0 +1,9 @@
+query getLocationById ($ids:[ID!]!){
+    locationsByIds(ids:$ids){
+        name
+        dimension
+        residents {
+            ...CharacterCardFragment
+        }
+    }
+}

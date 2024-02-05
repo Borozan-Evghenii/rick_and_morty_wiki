@@ -1,7 +1,5 @@
 import React from 'react';
 
-import type { GetProps } from '../../../../@types';
-
 interface InputProps extends GetProps<'input'> {
   iconStart?: React.ReactNode;
   iconEnd?: React.ReactNode;
