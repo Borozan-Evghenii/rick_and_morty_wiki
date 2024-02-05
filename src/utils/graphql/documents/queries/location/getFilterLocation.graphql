@@ -1,0 +1,7 @@
+query getFilterLocations ($name: String, $dimension: String, $type:String ) {
+    locations(filter: {name: $name, dimension: $dimension, type: $type}){
+        results {
+            ...LocationCard
+        }
+    }
+}

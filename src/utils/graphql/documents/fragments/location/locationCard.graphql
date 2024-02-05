@@ -3,4 +3,7 @@ fragment LocationCard on Location {
     name
     type
     dimension
+    residents {
+        ...CharacterCardFragment
+    }
 }

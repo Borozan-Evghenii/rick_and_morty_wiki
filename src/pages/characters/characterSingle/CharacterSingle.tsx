@@ -9,11 +9,11 @@ import { useParams } from 'react-router';
 
 export const CharacterSingle: React.FC = () => {
   const params = useParams();
-  const charcaterId = params.id || '';
+  const characterId = params.id || '';
 
   const characterResponse = useGetCharacterByIdQuery({
     variables: {
-      ids: charcaterId
+      ids: characterId
     }
   });
 

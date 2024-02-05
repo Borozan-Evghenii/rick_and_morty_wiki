@@ -1,46 +1,50 @@
-import { EpisodeCard, HeroSection, Select } from '@components';
+import { Autocomplete, EpisodeCard, HeroSection, Select } from '@components';
+import { useGetFilterEpisodesQuery } from '@gql';
 import { GridLayout, PageLayout, SectionLayout } from '@layouts';
+import { useState } from 'react';
 
-const selectData = [
-  { id: '1', value: 'SO01E' },
-  { id: '2', value: 'SO02E' },
-  { id: '3', value: 'SO03E' }
-];
-export const Episodes = () => (
-  <PageLayout>
-    <HeroSection />
-    <SectionLayout>
-      <div className="flex justify-end">
-        <Select
-          className="min-w-[230px]"
-          data={selectData}
-          prefix="Episode: "
-          /* eslint-disable-next-line no-console */
-          onSelect={() => console.log('')}
-        />
-      </div>
-    </SectionLayout>
-    <SectionLayout>
-      <GridLayout columns="3">
-        <EpisodeCard />
-        <EpisodeCard />
-        <EpisodeCard />
-        <EpisodeCard />
-        <EpisodeCard />
-        <EpisodeCard />
-        <EpisodeCard />
-        <EpisodeCard />
-        <EpisodeCard />
-        <EpisodeCard />
-        <EpisodeCard />
-        <EpisodeCard />
-        <EpisodeCard />
-        <EpisodeCard />
-        <EpisodeCard />
-        <EpisodeCard />
-        <EpisodeCard />
-        <EpisodeCard />
-      </GridLayout>
-    </SectionLayout>
-  </PageLayout>
-);
+interface Filter {
+  name: string;
+  episode: string;
+}
+
+const filterObject: Filter = {
+  episode: '',
+  name: ''
+};
+
+export const Episodes = () => {
+  const [filter, setFilter] = useState<Filter>(filterObject);
+  const episodesResponse = useGetFilterEpisodesQuery({ variables: filter });
+
+  return (
+    <PageLayout>
+      <HeroSection />
+      <SectionLayout>
+        <div className="flex justify-end">
+          <Autocomplete
+            data={episodesResponse.data?.episodes.results.map((episode) => ({
+              id: episode.id,
+              value: episode.name
+            }))}
+            onChange={(_, value) => setFilter((prev) => ({ ...prev, name: value }))}
+          />
+          <Select
+            className="min-w-[230px]"
+            data={[]}
+            prefix="Episode: "
+            /* eslint-disable-next-line no-console */
+            onSelect={(_, value) => setFilter((prev) => ({ ...prev, name: value }))}
+          />
+        </div>
+      </SectionLayout>
+      <SectionLayout>
+        <GridLayout columns="3">
+          {episodesResponse.data?.episodes.results.map((episode) => (
+            <EpisodeCard key={episode.id} episodeData={episode} />
+          ))}
+        </GridLayout>
+      </SectionLayout>
+    </PageLayout>
+  );
+};

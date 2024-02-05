@@ -1,5 +1,7 @@
 import { Autocomplete, HeroSection, LocationCard, Select } from '@components';
+import { useGetFilterLocationsQuery } from '@gql';
 import { FilterLayout, GridLayout, PageLayout, SectionLayout } from '@layouts';
+import { useState } from 'react';
 
 const mockData = {
   dimension: [
@@ -26,33 +28,45 @@ const mockData = {
   ]
 };
 
-export const Locations = () => (
-  <PageLayout>
-    <HeroSection />
-    <FilterLayout>
-      <Autocomplete
-        className="md:col-span-2 lg:col-span-3"
-        data={mockData.search}
-        onChange={() => {}}
-      />
-      <Select data={mockData.type} prefix="Type: " onSelect={() => {}} />
-      <Select data={mockData.dimension} prefix="Dimension: " onSelect={() => {}} />
-    </FilterLayout>
-    <SectionLayout>
-      <GridLayout columns="4">
-        <LocationCard />
-        <LocationCard />
-        <LocationCard />
-        <LocationCard />
-        <LocationCard />
-        <LocationCard />
-        <LocationCard />
-        <LocationCard />
-        <LocationCard />
-        <LocationCard />
-        <LocationCard />
-        <LocationCard />
-      </GridLayout>
-    </SectionLayout>
-  </PageLayout>
-);
+interface Filter {
+  dimension: string;
+  type: string;
+  name: string;
+}
+
+const filterObject: Filter = {
+  dimension: '',
+  name: '',
+  type: ''
+};
+
+export const Locations = () => {
+  const [filter, setFilter] = useState(filterObject);
+
+  const locationsResponse = useGetFilterLocationsQuery({
+    variables: filter
+  });
+
+  return (
+    <PageLayout>
+      <HeroSection />
+      <FilterLayout>
+        <Autocomplete
+          className="md:col-span-2 lg:col-span-3"
+          data={mockData.search}
+          onChange={(_, value) => setFilter((prev) => ({ ...prev, name: value }))}
+          onSelect={(_, value) => setFilter((prev) => ({ ...prev, name: value }))}
+        />
+        <Select data={mockData.type} prefix="Type: " onSelect={() => {}} />
+        <Select data={mockData.dimension} prefix="Dimension: " onSelect={() => {}} />
+      </FilterLayout>
+      <SectionLayout>
+        <GridLayout columns="4">
+          {locationsResponse.data?.locations.results.map((location) => (
+            <LocationCard key={location.id} locationInfo={location} />
+          ))}
+        </GridLayout>
+      </SectionLayout>
+    </PageLayout>
+  );
+};

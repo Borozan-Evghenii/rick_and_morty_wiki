@@ -259,6 +259,13 @@ export type LocationCardFragment = {
   readonly name: string;
   readonly type: string;
   readonly dimension: string;
+  readonly residents: ReadonlyArray<{
+    readonly __typename?: 'Character';
+    readonly id: string;
+    readonly image: string;
+    readonly name: string;
+    readonly species: string;
+  }>;
 };
 
 export type ResponseInfoFragment = {
@@ -438,6 +445,40 @@ export type GetAllLocationsQuery = {
       readonly name: string;
       readonly type: string;
       readonly dimension: string;
+      readonly residents: ReadonlyArray<{
+        readonly __typename?: 'Character';
+        readonly id: string;
+        readonly image: string;
+        readonly name: string;
+        readonly species: string;
+      }>;
+    }>;
+  };
+};
+
+export type GetFilterLocationsQueryVariables = Exact<{
+  name: InputMaybe<Scalars['String']['input']>;
+  dimension: InputMaybe<Scalars['String']['input']>;
+  type: InputMaybe<Scalars['String']['input']>;
+}>;
+
+export type GetFilterLocationsQuery = {
+  readonly __typename?: 'Query';
+  readonly locations: {
+    readonly __typename?: 'Locations';
+    readonly results: ReadonlyArray<{
+      readonly __typename?: 'Location';
+      readonly id: string;
+      readonly name: string;
+      readonly type: string;
+      readonly dimension: string;
+      readonly residents: ReadonlyArray<{
+        readonly __typename?: 'Character';
+        readonly id: string;
+        readonly image: string;
+        readonly name: string;
+        readonly species: string;
+      }>;
     }>;
   };
 };
@@ -511,7 +552,11 @@ export const LocationCardFragmentDoc = gql`
     name
     type
     dimension
+    residents {
+      ...CharacterCardFragment
+    }
   }
+  ${CharacterCardFragmentFragmentDoc}
 `;
 export const ResponseInfoFragmentDoc = gql`
   fragment responseInfo on Info {
@@ -560,7 +605,6 @@ export function useGetAllCharactersQuery(
     options
   );
 }
-
 export function useGetAllCharactersLazyQuery(
   baseOptions?: Apollo.LazyQueryHookOptions<GetAllCharactersQuery, GetAllCharactersQueryVariables>
 ) {
@@ -570,7 +614,6 @@ export function useGetAllCharactersLazyQuery(
     options
   );
 }
-
 export function useGetAllCharactersSuspenseQuery(
   baseOptions?: Apollo.SuspenseQueryHookOptions<
     GetAllCharactersQuery,
@@ -583,7 +626,6 @@ export function useGetAllCharactersSuspenseQuery(
     options
   );
 }
-
 export type GetAllCharactersQueryHookResult = ReturnType<typeof useGetAllCharactersQuery>;
 export type GetAllCharactersLazyQueryHookResult = ReturnType<typeof useGetAllCharactersLazyQuery>;
 export type GetAllCharactersSuspenseQueryHookResult = ReturnType<
@@ -627,7 +669,6 @@ export function useGetCharacterByIdQuery(
     options
   );
 }
-
 export function useGetCharacterByIdLazyQuery(
   baseOptions?: Apollo.LazyQueryHookOptions<GetCharacterByIdQuery, GetCharacterByIdQueryVariables>
 ) {
@@ -637,7 +678,6 @@ export function useGetCharacterByIdLazyQuery(
     options
   );
 }
-
 export function useGetCharacterByIdSuspenseQuery(
   baseOptions?: Apollo.SuspenseQueryHookOptions<
     GetCharacterByIdQuery,
@@ -650,7 +690,6 @@ export function useGetCharacterByIdSuspenseQuery(
     options
   );
 }
-
 export type GetCharacterByIdQueryHookResult = ReturnType<typeof useGetCharacterByIdQuery>;
 export type GetCharacterByIdLazyQueryHookResult = ReturnType<typeof useGetCharacterByIdLazyQuery>;
 export type GetCharacterByIdSuspenseQueryHookResult = ReturnType<
@@ -708,7 +747,6 @@ export function useGetFilterCharactersQuery(
     options
   );
 }
-
 export function useGetFilterCharactersLazyQuery(
   baseOptions?: Apollo.LazyQueryHookOptions<
     GetFilterCharactersQuery,
@@ -721,7 +759,6 @@ export function useGetFilterCharactersLazyQuery(
     options
   );
 }
-
 export function useGetFilterCharactersSuspenseQuery(
   baseOptions?: Apollo.SuspenseQueryHookOptions<
     GetFilterCharactersQuery,
@@ -734,7 +771,6 @@ export function useGetFilterCharactersSuspenseQuery(
     options
   );
 }
-
 export type GetFilterCharactersQueryHookResult = ReturnType<typeof useGetFilterCharactersQuery>;
 export type GetFilterCharactersLazyQueryHookResult = ReturnType<
   typeof useGetFilterCharactersLazyQuery
@@ -781,7 +817,6 @@ export function useGetAllEpisodesQuery(
     options
   );
 }
-
 export function useGetAllEpisodesLazyQuery(
   baseOptions?: Apollo.LazyQueryHookOptions<GetAllEpisodesQuery, GetAllEpisodesQueryVariables>
 ) {
@@ -791,7 +826,6 @@ export function useGetAllEpisodesLazyQuery(
     options
   );
 }
-
 export function useGetAllEpisodesSuspenseQuery(
   baseOptions?: Apollo.SuspenseQueryHookOptions<GetAllEpisodesQuery, GetAllEpisodesQueryVariables>
 ) {
@@ -801,7 +835,6 @@ export function useGetAllEpisodesSuspenseQuery(
     options
   );
 }
-
 export type GetAllEpisodesQueryHookResult = ReturnType<typeof useGetAllEpisodesQuery>;
 export type GetAllEpisodesLazyQueryHookResult = ReturnType<typeof useGetAllEpisodesLazyQuery>;
 export type GetAllEpisodesSuspenseQueryHookResult = ReturnType<
@@ -850,7 +883,6 @@ export function useGetEpisodeByIdQuery(
     options
   );
 }
-
 export function useGetEpisodeByIdLazyQuery(
   baseOptions?: Apollo.LazyQueryHookOptions<GetEpisodeByIdQuery, GetEpisodeByIdQueryVariables>
 ) {
@@ -860,7 +892,6 @@ export function useGetEpisodeByIdLazyQuery(
     options
   );
 }
-
 export function useGetEpisodeByIdSuspenseQuery(
   baseOptions?: Apollo.SuspenseQueryHookOptions<GetEpisodeByIdQuery, GetEpisodeByIdQueryVariables>
 ) {
@@ -870,7 +901,6 @@ export function useGetEpisodeByIdSuspenseQuery(
     options
   );
 }
-
 export type GetEpisodeByIdQueryHookResult = ReturnType<typeof useGetEpisodeByIdQuery>;
 export type GetEpisodeByIdLazyQueryHookResult = ReturnType<typeof useGetEpisodeByIdLazyQuery>;
 export type GetEpisodeByIdSuspenseQueryHookResult = ReturnType<
@@ -917,7 +947,6 @@ export function useGetFilterEpisodesQuery(
     options
   );
 }
-
 export function useGetFilterEpisodesLazyQuery(
   baseOptions?: Apollo.LazyQueryHookOptions<GetFilterEpisodesQuery, GetFilterEpisodesQueryVariables>
 ) {
@@ -927,7 +956,6 @@ export function useGetFilterEpisodesLazyQuery(
     options
   );
 }
-
 export function useGetFilterEpisodesSuspenseQuery(
   baseOptions?: Apollo.SuspenseQueryHookOptions<
     GetFilterEpisodesQuery,
@@ -940,7 +968,6 @@ export function useGetFilterEpisodesSuspenseQuery(
     options
   );
 }
-
 export type GetFilterEpisodesQueryHookResult = ReturnType<typeof useGetFilterEpisodesQuery>;
 export type GetFilterEpisodesLazyQueryHookResult = ReturnType<typeof useGetFilterEpisodesLazyQuery>;
 export type GetFilterEpisodesSuspenseQueryHookResult = ReturnType<
@@ -985,7 +1012,6 @@ export function useGetAllLocationsQuery(
     options
   );
 }
-
 export function useGetAllLocationsLazyQuery(
   baseOptions?: Apollo.LazyQueryHookOptions<GetAllLocationsQuery, GetAllLocationsQueryVariables>
 ) {
@@ -995,7 +1021,6 @@ export function useGetAllLocationsLazyQuery(
     options
   );
 }
-
 export function useGetAllLocationsSuspenseQuery(
   baseOptions?: Apollo.SuspenseQueryHookOptions<GetAllLocationsQuery, GetAllLocationsQueryVariables>
 ) {
@@ -1005,7 +1030,6 @@ export function useGetAllLocationsSuspenseQuery(
     options
   );
 }
-
 export type GetAllLocationsQueryHookResult = ReturnType<typeof useGetAllLocationsQuery>;
 export type GetAllLocationsLazyQueryHookResult = ReturnType<typeof useGetAllLocationsLazyQuery>;
 export type GetAllLocationsSuspenseQueryHookResult = ReturnType<
@@ -1014,6 +1038,82 @@ export type GetAllLocationsSuspenseQueryHookResult = ReturnType<
 export type GetAllLocationsQueryResult = Apollo.QueryResult<
   GetAllLocationsQuery,
   GetAllLocationsQueryVariables
+>;
+export const GetFilterLocationsDocument = gql`
+  query getFilterLocations($name: String, $dimension: String, $type: String) {
+    locations(filter: { name: $name, dimension: $dimension, type: $type }) {
+      results {
+        ...LocationCard
+      }
+    }
+  }
+  ${LocationCardFragmentDoc}
+`;
+
+/**
+ * __useGetFilterLocationsQuery__
+ *
+ * To run a query within a React component, call `useGetFilterLocationsQuery` and pass it any options that fit your needs.
+ * When your component renders, `useGetFilterLocationsQuery` returns an object from Apollo Client that contains loading, error, and data properties
+ * you can use to render your UI.
+ *
+ * @param baseOptions options that will be passed into the query, supported options are listed on: https://www.apollographql.com/docs/react/api/react-hooks/#options;
+ *
+ * @example
+ * const { data, loading, error } = useGetFilterLocationsQuery({
+ *   variables: {
+ *      name: // value for 'name'
+ *      dimension: // value for 'dimension'
+ *      type: // value for 'type'
+ *   },
+ * });
+ */
+export function useGetFilterLocationsQuery(
+  baseOptions?: Apollo.QueryHookOptions<GetFilterLocationsQuery, GetFilterLocationsQueryVariables>
+) {
+  const options = { ...defaultOptions, ...baseOptions };
+  return Apollo.useQuery<GetFilterLocationsQuery, GetFilterLocationsQueryVariables>(
+    GetFilterLocationsDocument,
+    options
+  );
+}
+
+export function useGetFilterLocationsLazyQuery(
+  baseOptions?: Apollo.LazyQueryHookOptions<
+    GetFilterLocationsQuery,
+    GetFilterLocationsQueryVariables
+  >
+) {
+  const options = { ...defaultOptions, ...baseOptions };
+  return Apollo.useLazyQuery<GetFilterLocationsQuery, GetFilterLocationsQueryVariables>(
+    GetFilterLocationsDocument,
+    options
+  );
+}
+
+export function useGetFilterLocationsSuspenseQuery(
+  baseOptions?: Apollo.SuspenseQueryHookOptions<
+    GetFilterLocationsQuery,
+    GetFilterLocationsQueryVariables
+  >
+) {
+  const options = { ...defaultOptions, ...baseOptions };
+  return Apollo.useSuspenseQuery<GetFilterLocationsQuery, GetFilterLocationsQueryVariables>(
+    GetFilterLocationsDocument,
+    options
+  );
+}
+
+export type GetFilterLocationsQueryHookResult = ReturnType<typeof useGetFilterLocationsQuery>;
+export type GetFilterLocationsLazyQueryHookResult = ReturnType<
+  typeof useGetFilterLocationsLazyQuery
+>;
+export type GetFilterLocationsSuspenseQueryHookResult = ReturnType<
+  typeof useGetFilterLocationsSuspenseQuery
+>;
+export type GetFilterLocationsQueryResult = Apollo.QueryResult<
+  GetFilterLocationsQuery,
+  GetFilterLocationsQueryVariables
 >;
 export const GetLocationByIdDocument = gql`
   query getLocationById($ids: [ID!]!) {
@@ -1053,7 +1153,6 @@ export function useGetLocationByIdQuery(
     options
   );
 }
-
 export function useGetLocationByIdLazyQuery(
   baseOptions?: Apollo.LazyQueryHookOptions<GetLocationByIdQuery, GetLocationByIdQueryVariables>
 ) {
@@ -1063,7 +1162,6 @@ export function useGetLocationByIdLazyQuery(
     options
   );
 }
-
 export function useGetLocationByIdSuspenseQuery(
   baseOptions?: Apollo.SuspenseQueryHookOptions<GetLocationByIdQuery, GetLocationByIdQueryVariables>
 ) {
@@ -1073,7 +1171,6 @@ export function useGetLocationByIdSuspenseQuery(
     options
   );
 }
-
 export type GetLocationByIdQueryHookResult = ReturnType<typeof useGetLocationByIdQuery>;
 export type GetLocationByIdLazyQueryHookResult = ReturnType<typeof useGetLocationByIdLazyQuery>;
 export type GetLocationByIdSuspenseQueryHookResult = ReturnType<
