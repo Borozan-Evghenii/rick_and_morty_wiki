@@ -12,7 +12,7 @@ interface SelectProps<T> {
   className?: string;
 }
 
-export const Select = <T extends { id: string; value: string }>({
+export const Select = <T extends { id: string; name: string }>({
   data,
   onSelect,
   prefix,

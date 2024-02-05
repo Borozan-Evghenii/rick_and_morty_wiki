@@ -1,50 +1,56 @@
 import { Input } from '@UI';
+import type { DocumentNode } from '@apollo/client';
+import { useLazyQuery } from '@apollo/client';
 import { useInput, useOnClickOutside } from '@hooks';
 import React from 'react';
 import { CiSearch } from 'react-icons/ci';
+import { VscLoading } from 'react-icons/vsc';
 
 import { DropDown } from '../dropdown/DropDown.tsx';
 
-interface AutocompleteProps<T> {
+interface AutocompleteProps {
   icon?: React.ReactNode;
-  data: T;
-  onChange: (event: React.ChangeEvent, value: string) => void;
+  query: DocumentNode;
   onSelect: (event: React.MouseEvent<HTMLDivElement>, value: string) => void;
   className?: string;
 }
 
-export const Autocomplete = <T extends { id: string; value: string }[] | undefined>({
-  data,
-  icon,
-  onChange,
-  className,
-  onSelect
-}: AutocompleteProps<T>) => {
-  const [showDropDown, setShowDropDown] = React.useState<boolean>(false);
+export const Autocomplete: React.FC<AutocompleteProps> = ({ query, icon, className, onSelect }) => {
+  const [showDropDown, setShowDropDown] = React.useState(false);
   const inputValue = useInput('');
+
   const { componentRef } = useOnClickOutside(() => setShowDropDown(false));
 
-  const filteredData = React.useMemo(
-    () =>
-      data?.filter((item) => item?.value.toLowerCase().includes(inputValue.value.toLowerCase())),
-    [data, inputValue]
-  );
+  const [getData, { data, loading }] = useLazyQuery(query);
+
+  const handleChange = (event: React.ChangeEvent<HTMLInputElement>) => {
+    inputValue.onChangeValue(event.target.value);
+
+    getData({
+      variables: {
+        name: event.target.value
+      }
+    });
+  };
 
   return (
-    <div ref={componentRef} className={`relative ${className}`}>
+    <div ref={componentRef} className={`relative  ${className}`}>
       <Input
         iconStart={!icon ? <CiSearch className="h-full w-5" /> : icon}
         value={inputValue.value}
-        onChange={(event: React.ChangeEvent<HTMLInputElement>) => {
-          onChange(event, event.target.value);
-          inputValue.onChangeValue(event.target.value);
-        }}
+        iconEnd={
+          <div className="flex items-stretch justify-center">
+            {loading && <VscLoading className="animate-spin self-center" />}
+          </div>
+        }
+        onChange={handleChange}
         onFocus={() => {
           setShowDropDown((prev) => !prev);
         }}
       />
       <DropDown
-        data={filteredData}
+        /* eslint-disable-next-line @typescript-eslint/no-unsafe-argument */
+        data={data ? data[Object.keys(data)[0]].results : []}
         show={showDropDown}
         onSelect={(event, value) => {
           onSelect(event, value);
