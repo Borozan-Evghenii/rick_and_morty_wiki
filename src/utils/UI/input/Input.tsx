@@ -3,9 +3,10 @@ import React from 'react';
 interface InputProps extends GetProps<'input'> {
   iconStart?: React.ReactNode;
   iconEnd?: React.ReactNode;
+  clearIcon?: React.ReactNode;
 }
 
-export const Input: React.FC<InputProps> = ({ iconStart, iconEnd, ...props }) => (
+export const Input: React.FC<InputProps> = ({ iconStart, iconEnd, clearIcon, ...props }) => (
   <div className="flex h-[48px] items-stretch justify-start gap-2.5 overflow-hidden rounded-lg border border-light-accent px-[12px] has-[:focus]:border-light-primary dark:border-dark-accent dark:has-[:focus]:border-dark-primary">
     {iconStart}
     <input
@@ -14,6 +15,9 @@ export const Input: React.FC<InputProps> = ({ iconStart, iconEnd, ...props }) =>
       placeholder="Enter name"
       type="text"
     />
-    {iconEnd}
+    <div className="flex gap-2 ">
+      {iconEnd}
+      {clearIcon}
+    </div>
   </div>
 );

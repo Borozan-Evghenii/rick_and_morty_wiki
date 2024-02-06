@@ -6,7 +6,7 @@ import { DropDown } from '../dropdown/DropDown.tsx';
 
 interface SelectProps<T> {
   data: T[];
-  onSelect: (event: React.MouseEvent<HTMLDivElement>, value: string) => void;
+  onSelect: (event: React.MouseEvent<HTMLLIElement>, value: string) => void;
   prefix?: string;
   icon?: React.ReactNode;
   className?: string;
@@ -23,7 +23,7 @@ export const Select = <T extends { id: string; name: string }>({
   const selectedValue = useInput('');
   const { componentRef } = useOnClickOutside(() => setShowDropdown(false));
 
-  const onSelectDropdownItem = (event: React.MouseEvent<HTMLDivElement>, value: string) => {
+  const onSelectDropdownItem = (event: React.MouseEvent<HTMLLIElement>, value: string) => {
     selectedValue.onChangeValue(value);
     setShowDropdown(false);
     onSelect(event, value);
@@ -33,7 +33,7 @@ export const Select = <T extends { id: string; name: string }>({
     <div ref={componentRef} className={`relative ${className}`}>
       <button
         className=" flex h-[48px] w-full items-center justify-between gap-2.5 overflow-hidden rounded-lg border border-light-accent px-[12px] focus:border-light-primary dark:border-dark-accent dark:focus:border-dark-primary"
-        onClick={() => setShowDropdown(true)}
+        onClick={() => setShowDropdown((prevState) => !prevState)}
       >
         <p className="... overflow-hidden truncate text-light-primary dark:text-dark-primary">
           <span

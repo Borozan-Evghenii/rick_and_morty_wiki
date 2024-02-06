@@ -1,30 +1,31 @@
-import { Autocomplete, CharacterCard, HeroSection, Select } from '@components';
-import type { CharacterCardFragmentFragment } from '@gql';
+import { Autocomplete, CharacterCard, CharacterCardLoader, HeroSection, Select } from '@components';
 import { GetFilterCharactersDocument, useGetFilterCharactersQuery } from '@gql';
 import { FilterLayout, GridLayout, SectionLayout } from '@layouts';
 import { useState } from 'react';
 
+import NotFoundResults from '../../utils/components/notFoundResults/NotFoundResults.tsx';
+
 const mockData = {
   gender: [
-    { id: '1', value: 'Male' },
-    { id: '2', value: 'Female' },
-    { id: '3', value: 'unknown' }
+    { id: '1', name: 'Male' },
+    { id: '2', name: 'Female' },
+    { id: '3', name: 'unknown' }
   ],
   species: [
-    { id: '1', value: 'Human' },
-    { id: '2', value: 'Alien' }
+    { id: '1', name: 'Human' },
+    { id: '2', name: 'Alien' }
   ],
   status: [
-    { id: '1', value: 'Alive' },
-    { id: '2', value: 'Death' },
-    { id: '3', value: 'Unknown' }
+    { id: '1', name: 'Alive' },
+    { id: '2', name: 'Death' },
+    { id: '3', name: 'Unknown' }
   ],
   type: [
-    { id: '1', value: 'Genetic experiment' },
-    { id: '2', value: 'Superhuman (Ghost trains summoner)' },
-    { id: '3', value: 'Parasite' },
-    { id: '4', value: 'Human with antennae' },
-    { id: '5', value: 'Human with ants in his eyes' }
+    { id: '1', name: 'Genetic experiment' },
+    { id: '2', name: 'Superhuman (Ghost trains summoner)' },
+    { id: '3', name: 'Parasite' },
+    { id: '4', name: 'Human with antennae' },
+    { id: '5', name: 'Human with ants in his eyes' }
   ]
 };
 
@@ -58,6 +59,9 @@ export const Characters = () => {
           className="md:col-span-full lg:col-span-1"
           query={GetFilterCharactersDocument}
           onSelect={(_, value) => setFilter((prev) => ({ ...prev, name: value }))}
+          onResetValue={() => {
+            setFilter((prevState) => ({ ...prevState, name: '' }));
+          }}
         />
         <Select
           data={mockData.status}
@@ -85,13 +89,24 @@ export const Characters = () => {
         />
       </FilterLayout>
       <SectionLayout>
-        <GridLayout>
-          {charactersResponse?.data?.characters?.results?.map(
-            (character: CharacterCardFragmentFragment) => (
-              <CharacterCard key={character.id} info={character} />
-            )
-          )}
-        </GridLayout>
+        {!charactersResponse?.data?.characters?.results?.length && !charactersResponse.loading ? (
+          <NotFoundResults />
+        ) : (
+          <GridLayout>
+            {charactersResponse?.data?.characters?.results?.map((character, index) => (
+              <CharacterCard key={character.id} index={index} info={character} />
+            ))}
+          </GridLayout>
+        )}
+
+        {charactersResponse.loading && (
+          <GridLayout>
+            <CharacterCardLoader />
+            <CharacterCardLoader />
+            <CharacterCardLoader />
+            <CharacterCardLoader />
+          </GridLayout>
+        )}
       </SectionLayout>
     </>
   );

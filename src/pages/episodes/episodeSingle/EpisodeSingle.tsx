@@ -1,8 +1,10 @@
-import { CharacterCard, HeroSection } from '@components';
+import { CharacterCard, CharacterCardLoader, HeroSection } from '@components';
 import { useGetEpisodeByIdQuery } from '@gql';
 import { GridLayout, SectionLayout } from '@layouts';
 import React from 'react';
 import { useParams } from 'react-router';
+
+import NotFoundResults from '../../../utils/components/notFoundResults/NotFoundResults.tsx';
 
 export const EpisodeSingle: React.FC = () => {
   const param = useParams();
@@ -18,11 +20,24 @@ export const EpisodeSingle: React.FC = () => {
     <>
       <HeroSection title={episodeResponse.data?.episodesByIds[0].name} />
       <SectionLayout title="Characters in this episode">
-        <GridLayout>
-          {episodeResponse?.data?.episodesByIds[0]?.characters.map((character) => (
-            <CharacterCard key={character.id} info={character} />
-          ))}
-        </GridLayout>
+        {!episodeResponse?.data?.episodesByIds[0].characters?.length && !episodeResponse.loading ? (
+          <NotFoundResults />
+        ) : (
+          <GridLayout>
+            {episodeResponse?.data?.episodesByIds[0].characters?.map((character, index) => (
+              <CharacterCard key={character.id} index={index} info={character} />
+            ))}
+          </GridLayout>
+        )}
+
+        {episodeResponse.loading && (
+          <GridLayout>
+            <CharacterCardLoader />
+            <CharacterCardLoader />
+            <CharacterCardLoader />
+            <CharacterCardLoader />
+          </GridLayout>
+        )}
       </SectionLayout>
     </>
   );

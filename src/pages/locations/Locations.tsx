@@ -1,11 +1,12 @@
-import { Autocomplete, HeroSection, LocationCard, Select } from '@components';
+import { Autocomplete, HeroSection, LocationCard, LocationCardLoader, Select } from '@components';
 import { GetFilterLocationsDocument, useGetFilterLocationsQuery } from '@gql';
 import { FilterLayout, GridLayout, SectionLayout } from '@layouts';
 import { useState } from 'react';
 
+import NotFoundResults from '../../utils/components/notFoundResults/NotFoundResults.tsx';
+
 const mockData = {
   dimension: [
-    { id: '0', name: 'Default' },
     { id: '1', name: 'Dimension C-137' },
     { id: '2', name: 'Post-Apocalyptic Dimension' },
     { id: '3', name: 'Replacement Dimension' },
@@ -21,7 +22,6 @@ const mockData = {
     { id: '7', name: 'Immortality Field Resort' }
   ],
   type: [
-    { id: '0', name: 'Default' },
     { id: '1', name: 'Planet' },
     { id: '2', name: 'Cluster' },
     { id: '3', name: 'Microverse' },
@@ -56,6 +56,9 @@ export const Locations = () => {
         <Autocomplete
           className="md:col-span-2 lg:col-span-3"
           query={GetFilterLocationsDocument}
+          onResetValue={() => {
+            setFilter((prevState) => ({ ...prevState, name: '' }));
+          }}
           onSelect={(_, value) =>
             setFilter((prev) => ({ ...prev, name: value === 'Default' ? '' : value }))
           }
@@ -74,11 +77,25 @@ export const Locations = () => {
         />
       </FilterLayout>
       <SectionLayout>
-        <GridLayout columns="4">
-          {locationsResponse.data?.locations.results.map((location) => (
-            <LocationCard key={location.id} locationInfo={location} />
-          ))}
-        </GridLayout>
+        {locationsResponse.loading && (
+          <GridLayout>
+            <LocationCardLoader />
+            <LocationCardLoader />
+            <LocationCardLoader />
+            <LocationCardLoader />
+            <LocationCardLoader />
+          </GridLayout>
+        )}
+
+        {!locationsResponse?.data?.locations?.results?.length && !locationsResponse.loading ? (
+          <NotFoundResults />
+        ) : (
+          <GridLayout>
+            {locationsResponse?.data?.locations?.results?.map((location, index) => (
+              <LocationCard key={location.id} index={index} locationInfo={location} />
+            ))}
+          </GridLayout>
+        )}
       </SectionLayout>
     </>
   );

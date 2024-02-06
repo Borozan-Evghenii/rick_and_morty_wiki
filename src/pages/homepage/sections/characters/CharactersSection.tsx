@@ -10,7 +10,7 @@ export const CharactersSection: React.FC = () => {
       <GridLayout columns="4">
         {characters?.data?.characters.results?.map((character, index) => {
           if (index < 8) {
-            return <CharacterCard key={character?.id} info={character} />;
+            return <CharacterCard key={character.id} index={index} info={character} />;
           }
           return null;
         })}

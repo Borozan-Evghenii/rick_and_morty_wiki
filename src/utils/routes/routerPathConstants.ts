@@ -5,6 +5,6 @@ export const ROUTER = {
   EPISODES: 'episodes',
   HOME: 'home',
   LOCATION_SINGLE: 'location/:id',
-  LOCATIONS: 'locations',
+  LOCATIONS: 'locations/',
   ROOT: '/'
 };
