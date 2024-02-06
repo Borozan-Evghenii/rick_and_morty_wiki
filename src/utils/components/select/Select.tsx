@@ -10,6 +10,7 @@ interface SelectProps<T> {
   prefix?: string;
   icon?: React.ReactNode;
   className?: string;
+  // value?: string;
 }
 
 export const Select = <T extends { id: string; name: string }>({

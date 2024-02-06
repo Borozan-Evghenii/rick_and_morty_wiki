@@ -21,8 +21,9 @@ export const Episodes = () => {
     <>
       <HeroSection title="Episodes" />
       <SectionLayout>
-        <div className="flex justify-end">
+        <div className="flex justify-end gap-5">
           <Autocomplete
+            className="grow"
             query={GetFilterEpisodesDocument}
             onSelect={(_, value) => setFilter((prev) => ({ ...prev, name: value }))}
           />

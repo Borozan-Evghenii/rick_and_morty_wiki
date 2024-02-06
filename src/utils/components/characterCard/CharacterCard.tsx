@@ -3,7 +3,11 @@ import type { CharacterCardFragmentFragment } from '@gql';
 import React from 'react';
 import { FiArrowUpRight } from 'react-icons/fi';
 
-export const CharacterCard: React.FC<{ info: CharacterCardFragmentFragment }> = ({ info }) => (
+interface CharacterCardProps {
+  info: CharacterCardFragmentFragment;
+}
+
+export const CharacterCard: React.FC<CharacterCardProps> = ({ info }) => (
   <div className="flex flex-col gap-5 rounded-[10px] bg-light-thirty p-[12px] dark:bg-dark-thirty">
     <div>
       <img alt={`${info?.name}`} className="w-full" src={`${info?.image}`} />
