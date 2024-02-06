@@ -6,7 +6,7 @@
     "skipLibCheck": true,
     "moduleResolution": "Node16",
     //if is set node16 doesn't work import alias
-    "module": "node16",
+    "module": "Node16",
 
     /* Bundler mode */
     "allowImportingTsExtensions": true,
