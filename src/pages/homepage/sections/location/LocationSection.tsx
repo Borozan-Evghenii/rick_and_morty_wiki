@@ -8,8 +8,8 @@ export const LocationSection: React.FC = () => {
   return (
     <HomeSectionLayout link="/locations" title="Locations">
       <GridLayout>
-        {locations.data?.locations.results.map((location) => (
-          <LocationCard key={location.id} locationInfo={location} />
+        {locations.data?.locations.results.map((location, index) => (
+          <LocationCard key={location.id} index={index} locationInfo={location} />
         ))}
       </GridLayout>
     </HomeSectionLayout>

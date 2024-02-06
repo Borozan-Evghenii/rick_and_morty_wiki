@@ -1,10 +1,8 @@
-import { Autocomplete, CharacterCard, HeroSection, Select } from '@components';
-import type { CharacterCardFragmentFragment } from '@gql';
+import { Autocomplete, CharacterCard, CharacterCardLoader, HeroSection, Select } from '@components';
 import { GetFilterCharactersDocument, useGetFilterCharactersQuery } from '@gql';
 import { FilterLayout, GridLayout, SectionLayout } from '@layouts';
 import { useState } from 'react';
 
-import { CharacterCardLoader } from '../../utils/components/characterCard/CharacterCardLoader.tsx';
 import NotFoundResults from '../../utils/components/notFoundResults/NotFoundResults.tsx';
 
 const mockData = {
@@ -61,6 +59,9 @@ export const Characters = () => {
           className="md:col-span-full lg:col-span-1"
           query={GetFilterCharactersDocument}
           onSelect={(_, value) => setFilter((prev) => ({ ...prev, name: value }))}
+          onResetValue={() => {
+            setFilter((prevState) => ({ ...prevState, name: '' }));
+          }}
         />
         <Select
           data={mockData.status}
@@ -92,11 +93,9 @@ export const Characters = () => {
           <NotFoundResults />
         ) : (
           <GridLayout>
-            {charactersResponse?.data?.characters?.results?.map(
-              (character: CharacterCardFragmentFragment) => (
-                <CharacterCard key={character.id} info={character} />
-              )
-            )}
+            {charactersResponse?.data?.characters?.results?.map((character, index) => (
+              <CharacterCard key={character.id} index={index} info={character} />
+            ))}
           </GridLayout>
         )}
 

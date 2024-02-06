@@ -1,7 +1,9 @@
-import { Autocomplete, EpisodeCard, HeroSection, Select } from '@components';
+import { Autocomplete, EpisodeCard, EpisodeCardLoader, HeroSection, Select } from '@components';
 import { GetFilterEpisodesDocument, useGetFilterEpisodesQuery } from '@gql';
 import { GridLayout, SectionLayout } from '@layouts';
 import { useState } from 'react';
+
+import NotFoundResults from '../../utils/components/notFoundResults/NotFoundResults.tsx';
 
 interface Filter {
   name: string;
@@ -26,6 +28,9 @@ export const Episodes = () => {
             className="grow"
             query={GetFilterEpisodesDocument}
             onSelect={(_, value) => setFilter((prev) => ({ ...prev, name: value }))}
+            onResetValue={() => {
+              setFilter((prevState) => ({ ...prevState, name: '' }));
+            }}
           />
           <Select
             className="min-w-[230px]"
@@ -37,11 +42,26 @@ export const Episodes = () => {
         </div>
       </SectionLayout>
       <SectionLayout>
-        <GridLayout columns="3">
-          {episodesResponse.data?.episodes.results.map((episode) => (
-            <EpisodeCard key={episode.id} episodeData={episode} />
-          ))}
-        </GridLayout>
+        {episodesResponse.loading && (
+          <GridLayout columns="3">
+            <EpisodeCardLoader />
+            <EpisodeCardLoader />
+            <EpisodeCardLoader />
+            <EpisodeCardLoader />
+            <EpisodeCardLoader />
+            <EpisodeCardLoader />
+          </GridLayout>
+        )}
+
+        {!episodesResponse?.data?.episodes?.results?.length && !episodesResponse.loading ? (
+          <NotFoundResults />
+        ) : (
+          <GridLayout columns="3">
+            {episodesResponse?.data?.episodes?.results?.map((episode, index) => (
+              <EpisodeCard key={episode.id} episodeData={episode} index={index} />
+            ))}
+          </GridLayout>
+        )}
       </SectionLayout>
     </>
   );
