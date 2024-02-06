@@ -7,3 +7,4 @@ export * from './header/Header.tsx';
 export * from './heroSection/HeroSection.tsx';
 export * from './locationCard/LocationCard.tsx';
 export * from './select/Select.tsx';
+export * from './notFoundResults/NotFoundResults.tsx';

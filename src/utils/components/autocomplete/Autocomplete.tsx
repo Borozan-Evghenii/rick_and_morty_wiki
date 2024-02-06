@@ -11,7 +11,7 @@ import { DropDown } from '../dropdown/DropDown.tsx';
 interface AutocompleteProps {
   icon?: React.ReactNode;
   query: DocumentNode;
-  onSelect: (event: React.MouseEvent<HTMLDivElement>, value: string) => void;
+  onSelect: (event: React.MouseEvent<HTMLLIElement>, value: string) => void;
   className?: string;
 }
 
@@ -49,14 +49,16 @@ export const Autocomplete: React.FC<AutocompleteProps> = ({ query, icon, classNa
         }}
       />
       <DropDown
-        /* eslint-disable-next-line @typescript-eslint/no-unsafe-argument */
-        data={data ? data[Object.keys(data)[0]].results : []}
-        show={showDropDown}
+        show={showDropDown && data}
+        /* eslint-disable-next-line react/jsx-sort-props */
         onSelect={(event, value) => {
           onSelect(event, value);
           inputValue.onChangeValue(value);
           setShowDropDown((prev) => !prev);
         }}
+        defaultItem={false}
+        /* eslint-disable-next-line @typescript-eslint/no-unsafe-argument */
+        data={data ? data[Object.keys(data)[0]].results : []}
       />
     </div>
   );

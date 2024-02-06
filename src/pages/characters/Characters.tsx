@@ -5,6 +5,7 @@ import { FilterLayout, GridLayout, SectionLayout } from '@layouts';
 import { useState } from 'react';
 
 import { CharacterCardLoader } from '../../utils/components/characterCard/CharacterCardLoader.tsx';
+import NotFoundResults from '../../utils/components/notFoundResults/NotFoundResults.tsx';
 
 const mockData = {
   gender: [
@@ -86,24 +87,27 @@ export const Characters = () => {
           onSelect={(_, value) => setFilter((prev) => ({ ...prev, gender: value }))}
         />
       </FilterLayout>
-      <button onClick={() => setFilter(filterObj)}>reset filter</button>
       <SectionLayout>
-        <GridLayout>
-          {charactersResponse.loading && (
-            <>
-              <CharacterCardLoader />
-              <CharacterCardLoader />
-              <CharacterCardLoader />
-              <CharacterCardLoader />
-            </>
-          )}
+        {!charactersResponse?.data?.characters?.results?.length && !charactersResponse.loading ? (
+          <NotFoundResults />
+        ) : (
+          <GridLayout>
+            {charactersResponse?.data?.characters?.results?.map(
+              (character: CharacterCardFragmentFragment) => (
+                <CharacterCard key={character.id} info={character} />
+              )
+            )}
+          </GridLayout>
+        )}
 
-          {charactersResponse?.data?.characters?.results?.map(
-            (character: CharacterCardFragmentFragment) => (
-              <CharacterCard key={character.id} info={character} />
-            )
-          )}
-        </GridLayout>
+        {charactersResponse.loading && (
+          <GridLayout>
+            <CharacterCardLoader />
+            <CharacterCardLoader />
+            <CharacterCardLoader />
+            <CharacterCardLoader />
+          </GridLayout>
+        )}
       </SectionLayout>
     </>
   );
