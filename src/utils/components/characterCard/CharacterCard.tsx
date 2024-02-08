@@ -6,7 +6,7 @@ import { FiArrowUpRight } from 'react-icons/fi';
 
 interface CharacterCardProps {
   info: CharacterCardFragmentFragment;
-  index: number;
+  index?: number;
 }
 
 export const CharacterCard: React.FC<CharacterCardProps> = ({ info, index }) => (
@@ -16,7 +16,7 @@ export const CharacterCard: React.FC<CharacterCardProps> = ({ info, index }) => 
     viewport={{ once: true }}
     whileInView={{ y: 0, opacity: 1 }}
     transition={{
-      delay: (index / 2) * 0.1,
+      delay: (index! / 2) * 0.1,
       duration: 0.2
     }}
   >

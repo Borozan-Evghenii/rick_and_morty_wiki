@@ -4,9 +4,8 @@
     "useDefineForClassFields": true,
     "lib": ["ES2020", "DOM", "DOM.Iterable"],
     "skipLibCheck": true,
-    // "moduleResolution": "Node16",
-    //if is set node16 doesn't work import alias
-    "module": "Node16",
+    "moduleResolution": "Bundler",
+    "module": "ESNext",
 
     /* Bundler mode */
     "allowImportingTsExtensions": true,
@@ -56,7 +55,6 @@
   },
   //"exclude": ["node_modules"],
   "include": [
-    "next-env.d.ts",
     "**/*.ts",
     "**/*.tsx"
   ],
