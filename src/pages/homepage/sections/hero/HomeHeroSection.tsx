@@ -10,8 +10,6 @@ export const HomeHeroSection: React.FC = () => {
     }
   });
 
-  console.log(randomId);
-
   const character = characterResponse.data?.charactersByIds[0];
 
   return (
