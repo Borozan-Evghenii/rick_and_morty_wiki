@@ -4,7 +4,7 @@ import React from 'react';
 const ApolloAppProvider: React.FC<{ children: React.ReactNode }> = ({ children }) => {
   const client = new ApolloClient({
     cache: new InMemoryCache(),
-    uri: `${import.meta.env.VITE_API_URL}graphql`
+    uri: `https://rickandmortyapi.com/graphql`
   });
 
   return <ApolloProvider client={client}>{children}</ApolloProvider>;
