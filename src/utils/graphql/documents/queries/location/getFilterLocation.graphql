@@ -1,5 +1,8 @@
-query getFilterLocations ($name: String, $dimension: String, $type:String ) {
-    locations(filter: {name: $name, dimension: $dimension, type: $type}){
+query getFilterLocations ($name: String, $dimension: String, $type:String, $page:Int ) {
+    locations(filter: {name: $name, dimension: $dimension, type: $type}, page:$page ){
+        info {
+            ...responseInfo
+        }
         results {
             ...LocationCard
         }

@@ -11,3 +11,4 @@ export * from './locationCard/LocationCard.tsx';
 export * from './locationCard/LocationCardLoader.tsx';
 export * from './select/Select.tsx';
 export * from './notFoundResults/NotFoundResults.tsx';
+export * from './pagination/Pagination.tsx';

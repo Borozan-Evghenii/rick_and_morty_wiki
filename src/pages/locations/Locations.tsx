@@ -1,4 +1,11 @@
-import { Autocomplete, HeroSection, LocationCard, LocationCardLoader, Select } from '@components';
+import {
+  Autocomplete,
+  HeroSection,
+  LocationCard,
+  LocationCardLoader,
+  Pagination,
+  Select
+} from '@components';
 import { GetFilterLocationsDocument, useGetFilterLocationsQuery } from '@gql';
 import { FilterLayout, GridLayout, SectionLayout } from '@layouts';
 import { useState } from 'react';
@@ -34,11 +41,13 @@ interface Filter {
   dimension: string;
   type: string;
   name: string;
+  page: number;
 }
 
 const filterObject: Filter = {
   dimension: '',
   name: '',
+  page: 1,
   type: ''
 };
 
@@ -57,23 +66,29 @@ export const Locations = () => {
           className="md:col-span-2 lg:col-span-3"
           query={GetFilterLocationsDocument}
           onResetValue={() => {
-            setFilter((prevState) => ({ ...prevState, name: '' }));
+            setFilter((prevState) => ({ ...prevState, name: '', page: 1 }));
           }}
           onSelect={(_, value) =>
-            setFilter((prev) => ({ ...prev, name: value === 'Default' ? '' : value }))
+            setFilter((prev) => ({ ...prev, name: value === 'Default' ? '' : value, page: 1 }))
           }
         />
         <Select
           data={mockData.type}
           prefix="Type: "
           onSelect={(_, value) =>
-            setFilter((prevState) => ({ ...prevState, type: value === 'Default' ? '' : value }))
+            setFilter((prevState) => ({
+              ...prevState,
+              type: value === 'Default' ? '' : value,
+              page: 1
+            }))
           }
         />
         <Select
           data={mockData.dimension}
           prefix="Dimension: "
-          onSelect={(_, value) => setFilter((prevState) => ({ ...prevState, dimension: value }))}
+          onSelect={(_, value) =>
+            setFilter((prevState) => ({ ...prevState, dimension: value, page: 1 }))
+          }
         />
       </FilterLayout>
       <SectionLayout>
@@ -90,11 +105,18 @@ export const Locations = () => {
         {!locationsResponse?.data?.locations?.results?.length && !locationsResponse.loading ? (
           <NotFoundResults />
         ) : (
-          <GridLayout>
-            {locationsResponse?.data?.locations?.results?.map((location, index) => (
-              <LocationCard key={location.id} index={index} locationInfo={location} />
-            ))}
-          </GridLayout>
+          <>
+            <GridLayout>
+              {locationsResponse?.data?.locations?.results?.map((location, index) => (
+                <LocationCard key={location.id} index={index} locationInfo={location} />
+              ))}
+            </GridLayout>
+            <Pagination
+              currentPage={filter.page}
+              totalPages={locationsResponse.data?.locations.info.pages}
+              onPageSelect={(page) => setFilter((prevState) => ({ ...prevState, page }))}
+            />
+          </>
         )}
       </SectionLayout>
     </>

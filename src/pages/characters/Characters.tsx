@@ -1,4 +1,11 @@
-import { Autocomplete, CharacterCard, CharacterCardLoader, HeroSection, Select } from '@components';
+import {
+  Autocomplete,
+  CharacterCard,
+  CharacterCardLoader,
+  HeroSection,
+  Pagination,
+  Select
+} from '@components';
 import { GetFilterCharactersDocument, useGetFilterCharactersQuery } from '@gql';
 import { FilterLayout, GridLayout, SectionLayout } from '@layouts';
 import { useState } from 'react';
@@ -35,11 +42,13 @@ interface Filter {
   species: string;
   status: string;
   type: string;
+  page: number;
 }
 
 const filterObj: Filter = {
   gender: '',
   name: '',
+  page: 1,
   species: '',
   status: '',
   type: ''
@@ -51,6 +60,7 @@ export const Characters = () => {
     variables: filter
   });
 
+  console.log(filter);
   return (
     <>
       <HeroSection title="Characters" />
@@ -60,43 +70,50 @@ export const Characters = () => {
           query={GetFilterCharactersDocument}
           onSelect={(_, value) => setFilter((prev) => ({ ...prev, name: value }))}
           onResetValue={() => {
-            setFilter((prevState) => ({ ...prevState, name: '' }));
+            setFilter((prevState) => ({ ...prevState, name: '', page: 1 }));
           }}
         />
         <Select
           data={mockData.status}
           prefix="Status: "
-          onSelect={(_, value) => setFilter((prev) => ({ ...prev, status: value }))}
+          onSelect={(_, value) => setFilter((prev) => ({ ...prev, status: value, page: 1 }))}
         />
         <Select
           data={mockData.species}
           prefix="Species: "
           /* eslint-disable-next-line no-console */
-          onSelect={(_, value) => setFilter((prev) => ({ ...prev, species: value }))}
+          onSelect={(_, value) => setFilter((prev) => ({ ...prev, species: value, page: 1 }))}
         />
 
         <Select
           data={mockData.type}
           prefix="Type: "
           /* eslint-disable-next-line no-console */
-          onSelect={(_, value) => setFilter((prev) => ({ ...prev, type: value }))}
+          onSelect={(_, value) => setFilter((prev) => ({ ...prev, type: value, page: 1 }))}
         />
         <Select
           data={mockData.gender}
           prefix="Gender: "
           /* eslint-disable-next-line no-console */
-          onSelect={(_, value) => setFilter((prev) => ({ ...prev, gender: value }))}
+          onSelect={(_, value) => setFilter((prev) => ({ ...prev, gender: value, page: 1 }))}
         />
       </FilterLayout>
       <SectionLayout>
         {!charactersResponse?.data?.characters?.results?.length && !charactersResponse.loading ? (
           <NotFoundResults />
         ) : (
-          <GridLayout>
-            {charactersResponse?.data?.characters?.results?.map((character, index) => (
-              <CharacterCard key={character.id} index={index} info={character} />
-            ))}
-          </GridLayout>
+          <>
+            <GridLayout>
+              {charactersResponse?.data?.characters?.results?.map((character, index) => (
+                <CharacterCard key={character.id} index={index} info={character} />
+              ))}
+            </GridLayout>
+            <Pagination
+              currentPage={filter.page}
+              totalPages={charactersResponse.data?.characters.info.pages}
+              onPageSelect={(page) => setFilter((prevState) => ({ ...prevState, page }))}
+            />
+          </>
         )}
 
         {charactersResponse.loading && (

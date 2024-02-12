@@ -4,3 +4,4 @@ export * from './useOnClickOutside/useOnClickOutside.ts';
 export * from './usePageTitle/usePageTitle.ts';
 export * from './useTheme/useTheme.ts';
 export * from './useScollTop/useScrollTop.ts';
+export * from './usePagination/usePagination.ts';
