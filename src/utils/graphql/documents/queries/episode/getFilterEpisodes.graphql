@@ -1,5 +1,8 @@
-query getFilterEpisodes($name:String, $episode:String){
-    episodes(filter: {name: $name, episode: $episode}){
+query getFilterEpisodes($name:String, $episode:String, $page:Int){
+    episodes(filter: {name: $name, episode: $episode}, page:$page ){
+        info {
+            ...responseInfo
+        }
         results {
             ...EpisodeCard
         }

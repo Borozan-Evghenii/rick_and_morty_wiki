@@ -282,13 +282,6 @@ export type GetAllCharactersQuery = {
   readonly __typename?: 'Query';
   readonly characters: {
     readonly __typename?: 'Characters';
-    readonly info: {
-      readonly __typename?: 'Info';
-      readonly count: number;
-      readonly pages: number;
-      readonly next: number;
-      readonly prev: number;
-    };
     readonly results: ReadonlyArray<{
       readonly __typename?: 'Character';
       readonly id: string;
@@ -347,12 +340,20 @@ export type GetFilterCharactersQueryVariables = Exact<{
   species: InputMaybe<Scalars['String']['input']>;
   type: InputMaybe<Scalars['String']['input']>;
   gender: InputMaybe<Scalars['String']['input']>;
+  page: InputMaybe<Scalars['Int']['input']>;
 }>;
 
 export type GetFilterCharactersQuery = {
   readonly __typename?: 'Query';
   readonly characters: {
     readonly __typename?: 'Characters';
+    readonly info: {
+      readonly __typename?: 'Info';
+      readonly count: number;
+      readonly pages: number;
+      readonly next: number;
+      readonly prev: number;
+    };
     readonly results: ReadonlyArray<{
       readonly __typename?: 'Character';
       readonly id: string;
@@ -410,12 +411,20 @@ export type GetEpisodeByIdQuery = {
 export type GetFilterEpisodesQueryVariables = Exact<{
   name: InputMaybe<Scalars['String']['input']>;
   episode: InputMaybe<Scalars['String']['input']>;
+  page: InputMaybe<Scalars['Int']['input']>;
 }>;
 
 export type GetFilterEpisodesQuery = {
   readonly __typename?: 'Query';
   readonly episodes: {
     readonly __typename?: 'Episodes';
+    readonly info: {
+      readonly __typename?: 'Info';
+      readonly count: number;
+      readonly pages: number;
+      readonly next: number;
+      readonly prev: number;
+    };
     readonly results: ReadonlyArray<{
       readonly __typename?: 'Episode';
       readonly id: string;
@@ -460,12 +469,20 @@ export type GetFilterLocationsQueryVariables = Exact<{
   name: InputMaybe<Scalars['String']['input']>;
   dimension: InputMaybe<Scalars['String']['input']>;
   type: InputMaybe<Scalars['String']['input']>;
+  page: InputMaybe<Scalars['Int']['input']>;
 }>;
 
 export type GetFilterLocationsQuery = {
   readonly __typename?: 'Query';
   readonly locations: {
     readonly __typename?: 'Locations';
+    readonly info: {
+      readonly __typename?: 'Info';
+      readonly count: number;
+      readonly pages: number;
+      readonly next: number;
+      readonly prev: number;
+    };
     readonly results: ReadonlyArray<{
       readonly __typename?: 'Location';
       readonly id: string;
@@ -569,15 +586,11 @@ export const ResponseInfoFragmentDoc = gql`
 export const GetAllCharactersDocument = gql`
   query getAllCharacters {
     characters {
-      info {
-        ...responseInfo
-      }
       results {
         ...CharacterCardFragment
       }
     }
   }
-  ${ResponseInfoFragmentDoc}
   ${CharacterCardFragmentFragmentDoc}
 `;
 
@@ -706,15 +719,21 @@ export const GetFilterCharactersDocument = gql`
     $species: String
     $type: String
     $gender: String
+    $page: Int
   ) {
     characters(
       filter: { name: $name, status: $status, species: $species, type: $type, gender: $gender }
+      page: $page
     ) {
+      info {
+        ...responseInfo
+      }
       results {
         ...CharacterCardFragment
       }
     }
   }
+  ${ResponseInfoFragmentDoc}
   ${CharacterCardFragmentFragmentDoc}
 `;
 
@@ -735,6 +754,7 @@ export const GetFilterCharactersDocument = gql`
  *      species: // value for 'species'
  *      type: // value for 'type'
  *      gender: // value for 'gender'
+ *      page: // value for 'page'
  *   },
  * });
  */
@@ -911,13 +931,17 @@ export type GetEpisodeByIdQueryResult = Apollo.QueryResult<
   GetEpisodeByIdQueryVariables
 >;
 export const GetFilterEpisodesDocument = gql`
-  query getFilterEpisodes($name: String, $episode: String) {
-    episodes(filter: { name: $name, episode: $episode }) {
+  query getFilterEpisodes($name: String, $episode: String, $page: Int) {
+    episodes(filter: { name: $name, episode: $episode }, page: $page) {
+      info {
+        ...responseInfo
+      }
       results {
         ...EpisodeCard
       }
     }
   }
+  ${ResponseInfoFragmentDoc}
   ${EpisodeCardFragmentDoc}
 `;
 
@@ -935,6 +959,7 @@ export const GetFilterEpisodesDocument = gql`
  *   variables: {
  *      name: // value for 'name'
  *      episode: // value for 'episode'
+ *      page: // value for 'page'
  *   },
  * });
  */
@@ -1040,13 +1065,17 @@ export type GetAllLocationsQueryResult = Apollo.QueryResult<
   GetAllLocationsQueryVariables
 >;
 export const GetFilterLocationsDocument = gql`
-  query getFilterLocations($name: String, $dimension: String, $type: String) {
-    locations(filter: { name: $name, dimension: $dimension, type: $type }) {
+  query getFilterLocations($name: String, $dimension: String, $type: String, $page: Int) {
+    locations(filter: { name: $name, dimension: $dimension, type: $type }, page: $page) {
+      info {
+        ...responseInfo
+      }
       results {
         ...LocationCard
       }
     }
   }
+  ${ResponseInfoFragmentDoc}
   ${LocationCardFragmentDoc}
 `;
 
@@ -1065,6 +1094,7 @@ export const GetFilterLocationsDocument = gql`
  *      name: // value for 'name'
  *      dimension: // value for 'dimension'
  *      type: // value for 'type'
+ *      page: // value for 'page'
  *   },
  * });
  */
@@ -1077,7 +1107,6 @@ export function useGetFilterLocationsQuery(
     options
   );
 }
-
 export function useGetFilterLocationsLazyQuery(
   baseOptions?: Apollo.LazyQueryHookOptions<
     GetFilterLocationsQuery,
@@ -1090,7 +1119,6 @@ export function useGetFilterLocationsLazyQuery(
     options
   );
 }
-
 export function useGetFilterLocationsSuspenseQuery(
   baseOptions?: Apollo.SuspenseQueryHookOptions<
     GetFilterLocationsQuery,
@@ -1103,7 +1131,6 @@ export function useGetFilterLocationsSuspenseQuery(
     options
   );
 }
-
 export type GetFilterLocationsQueryHookResult = ReturnType<typeof useGetFilterLocationsQuery>;
 export type GetFilterLocationsLazyQueryHookResult = ReturnType<
   typeof useGetFilterLocationsLazyQuery

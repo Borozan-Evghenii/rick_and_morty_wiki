@@ -25,7 +25,7 @@ export const CharacterCard: React.FC<CharacterCardProps> = ({ info, index }) => 
     </div>
     <div className="flex items-center justify-between gap-2">
       <div className="flex flex-col">
-        <h2 className="title5 ... truncate">{info?.name}</h2>
+        <h2 className="title5 whitespace-normal">{info?.name}</h2>
         <div className="flex items-center gap-5">
           <p className="regular text-light-secondary dark:text-dark-secondary ">{info?.species}</p>
           <div className="bg-red block h-2 w-2 rounded-full" />
